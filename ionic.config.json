@@ -1,5 +1,7 @@
 {
   "name": "desktop",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -8,6 +8,14 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
+
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import {AngularFireAuth, AngularFireAuthModule} from '@angular/fire/auth';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import {environment} from '../environments/environment';
+import {IonicStorageModule} from '@ionic/storage';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,12 +23,22 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    FormsModule,
+    IonicStorageModule.forRoot({
+      name: 'desktop',
+      driverOrder: ['localstorage']
+    })
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AngularFireAuth,
+    EmailComposer
   ],
   bootstrap: [AppComponent]
 })
