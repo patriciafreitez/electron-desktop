@@ -1,4 +1,4 @@
-export class TipoDocumento {
+export class Genero {
     key?: string;
     descripcion: string;
 }

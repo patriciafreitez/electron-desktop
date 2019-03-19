@@ -19,6 +19,8 @@
           <ion-item>
             <ion-label position="floating">E.P.S:</ion-label>
             <ion-select okText="Seleccionar" cancelText="Cerrar">
+              <ion-select-option *ngFor="let eps of epsList$ | async"
+              [value]="eps.descripcion">{{eps.descripcion}}</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item>
@@ -49,7 +51,10 @@
           <ion-item>
             <ion-label position="floating">Genero:</ion-label>
             <ion-select okText="Seleccionar" cancelText="Cerrar">
+              <ion-select-option *ngFor="let genero of generoList$ | async"
+              [value]="genero.descripcion">{{genero.descripcion}}</ion-select-option>
             </ion-select>
+
           </ion-item>
           <ion-item>
             <ion-label position="floating">Estado Civil:</ion-label>

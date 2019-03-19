@@ -7,6 +7,10 @@ import {Observable} from 'rxjs';
 import {UserService} from '../service/db/user.service';
 import {ActivatedRoute} from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { Eps } from '../models/eps';
+import { EpsService } from '../service/db/eps.service';
+import { Genero } from '../models/genero';
+import { GeneroService } from '../service/db/genero.service';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +19,8 @@ import { Storage } from '@ionic/storage';
 })
 export class HomePage implements OnInit {
   public estadoCivilList$: Observable<EstadoCivil[]>;
+  public epsList$: Observable<Eps[]>;
+  public generoList$: Observable<Genero[]>; 
 
   constructor(
       private route: ActivatedRoute,
@@ -22,7 +28,9 @@ export class HomePage implements OnInit {
       private angularFireAuth: AngularFireAuth,
       private estadoService: EstadoCivilService,
       private userService: UserService,
-      private storage: Storage
+      private storage: Storage,
+      private epsService: EpsService,
+      private generoService: GeneroService
   ) {
     storage.get('email').then(email => {
       userService.findByEmail(email).snapshotChanges().subscribe(changes => {
@@ -33,11 +41,20 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this._loadEstadoCivil();
+    this._loadEps();
+    this._loadGenero();
   }
 
   _loadEstadoCivil() {
     this.estadoCivilList$ = this.estadoService.getEstadoCivilList().valueChanges();
   }
+  _loadEps(){
+    this.epsList$ = this.epsService.getEpsList().valueChanges();
+  }
+  _loadGenero() {
+    this.generoList$ = this.generoService.getGenero().valueChanges();
+  }
+
 
   cerrarSesion() {
     this.angularFireAuth.auth.signOut().then(() => {

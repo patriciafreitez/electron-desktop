@@ -1,4 +1,4 @@
-export interface EstadoCivil {
+export class EstadoCivil {
     key?: string;
     descripcion: string;
 }

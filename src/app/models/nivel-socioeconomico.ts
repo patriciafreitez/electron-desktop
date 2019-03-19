@@ -1,4 +1,4 @@
-export interface NivelSocioeconomico {
+export class NivelSocioeconomico {
     key?: string;
     descripcion: string;
 }

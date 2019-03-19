@@ -1,4 +1,4 @@
-export interface Eps {
+export class Eps {
     key?: string;
     descripcion: string;
 }

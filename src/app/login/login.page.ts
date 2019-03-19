@@ -4,6 +4,9 @@ import {NavController} from '@ionic/angular';
 import {MessageService} from '../service/message.service';
 import {FirebaseAuth} from '../enum/firebase-auth.enum';
 import { Storage } from '@ionic/storage';
+import { Eps } from '../models/eps';
+import { EpsService } from '../service/db/eps.service';
+import { GeneroService } from '../service/db/genero.service';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +21,34 @@ export class LoginPage implements OnInit {
       private navController: NavController,
       private angularFireAuth: AngularFireAuth,
       private message: MessageService,
-      private storage: Storage
-  ) {}
+      private storage: Storage,
+      private eps: EpsService,
+      private genero: GeneroService
+  ) {
+    var array: any=[
+      {
+        descripcion: "Contributivo"
+      },
+      {
+        descripcion: "Otro"
+      },
+      {
+        descripcion: "Ninguno"
+      }
+    ]
+    //eps.addAllEps(array);
+    var arrayGenero: any=[
+      {
+        descripcion: "Femenino"
+      },
+      {
+        descripcion: "Masculino"
+      }
+    ]
+    //genero.addAllGenero(arrayGenero);
+    }
+    
+  
 
   ngOnInit() {}
 

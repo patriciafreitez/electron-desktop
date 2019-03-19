@@ -1,4 +1,4 @@
-export interface NivelEducativo {
+export class NivelEducativo {
     key?: string;
     descripcion: string;
 }

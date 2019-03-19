@@ -1,4 +1,4 @@
-export interface Responsable {
+export class Responsable {
     key?: string;
     nombre: string;
     telefono?: string;

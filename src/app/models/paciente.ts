@@ -5,7 +5,7 @@ import {NivelSocioeconomico} from './nivel-socioeconomico';
 import {NivelEducativo} from './nivel-educativo';
 import {Eps} from './eps';
 
-export interface Paciente {
+export class Paciente {
     key?: string;
     eps?: Eps;
     numero_identidad: string;
