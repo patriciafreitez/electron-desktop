@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import { Eps } from '../models/eps';
 import { EpsService } from '../service/db/eps.service';
 import { GeneroService } from '../service/db/genero.service';
+import { TipoDocumentoService } from '../service/db/tipo-documento.service';
 
 @Component({
   selector: 'app-login',
@@ -23,8 +24,10 @@ export class LoginPage implements OnInit {
       private message: MessageService,
       private storage: Storage,
       private eps: EpsService,
-      private genero: GeneroService
-  ) {
+      private genero: GeneroService,
+      private tipodocumento: TipoDocumentoService) 
+      
+   {
     var array: any=[
       {
         descripcion: "Contributivo"
@@ -45,7 +48,31 @@ export class LoginPage implements OnInit {
         descripcion: "Masculino"
       }
     ]
-    //genero.addAllGenero(arrayGenero);
+    
+    
+    genero.addAllTipoDocumento(arrayTipoDocumento);
+    
+    var arrayTipoDocumento: any=[
+      {
+        descripcion: "Tarjeta de Identidad"
+      },
+      {
+        descripcion: "Registro Civil"
+      },
+      {
+        descripcion: "Cedula de Ciudadania"
+      },
+      {
+        descripcion: "Cedula de Extrangeria"
+      },
+      {
+        descripcion: "Pasaporte"
+      },
+      ]
+    
+
+
+
     }
     
   

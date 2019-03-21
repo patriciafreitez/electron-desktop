@@ -22,6 +22,7 @@ export class GeneroService {
   addGenero(genero: Genero) {
     return this.generoListRef.push(genero);
   }
+  
   addAllGenero(genero: any){
     genero.forEach((element:Genero) => {
       this.addGenero(element)
