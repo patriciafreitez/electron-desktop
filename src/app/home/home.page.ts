@@ -11,6 +11,8 @@ import { Eps } from '../models/eps';
 import { EpsService } from '../service/db/eps.service';
 import { Genero } from '../models/genero';
 import { GeneroService } from '../service/db/genero.service';
+import { TipoDocumento } from '../models/tipo-documento';
+import { TipoDocumentoService } from '../service/db/tipo-documento.service';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +23,7 @@ export class HomePage implements OnInit {
   public estadoCivilList$: Observable<EstadoCivil[]>;
   public epsList$: Observable<Eps[]>;
   public generoList$: Observable<Genero[]>; 
+  public tipoDocumentoList$: Observable<TipoDocumento[]>;
 
   constructor(
       private route: ActivatedRoute,
@@ -30,7 +33,8 @@ export class HomePage implements OnInit {
       private userService: UserService,
       private storage: Storage,
       private epsService: EpsService,
-      private generoService: GeneroService
+      private generoService: GeneroService,
+      private tipoDocumentoService: TipoDocumentoService
   ) {
     storage.get('email').then(email => {
       userService.findByEmail(email).snapshotChanges().subscribe(changes => {
@@ -43,6 +47,7 @@ export class HomePage implements OnInit {
     this._loadEstadoCivil();
     this._loadEps();
     this._loadGenero();
+    this._loadTipoDocumento();
   }
 
   _loadEstadoCivil() {
@@ -54,6 +59,10 @@ export class HomePage implements OnInit {
   _loadGenero() {
     this.generoList$ = this.generoService.getGenero().valueChanges();
   }
+  _loadTipoDocumento() {
+    this.tipoDocumentoList$ = this.tipoDocumentoService.getTipoDocumentoList().valueChanges();
+  }
+  
 
 
   cerrarSesion() {
