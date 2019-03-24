@@ -23,17 +23,17 @@ export class TipoDocumentoService {
    return this.tipoDocumentoListRef.push(tipoDocumento);
  }
 
- addAllGenero(tipoDocumento: any){
+ addAllTipoDocumento(tipoDocumento: any) {
   tipoDocumento.forEach((element:TipoDocumento) => {
     this. addTipoDocumento(element)
     });
   }
 
- editEstadoCivil(tipoDocumento: TipoDocumento) {
+ editTipoDocumento(tipoDocumento: TipoDocumento) {
    return this.tipoDocumentoListRef.update(tipoDocumento.key, tipoDocumento);
  }
 
- removeEstadoCivil(tipoDocumento: TipoDocumento) {
+ removeTipoDocumento(tipoDocumento: TipoDocumento) {
    return this.tipoDocumentoListRef.remove(tipoDocumento.key);
  }
 }

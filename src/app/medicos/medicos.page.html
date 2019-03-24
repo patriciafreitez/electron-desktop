@@ -1,102 +1,104 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button routerLink="/home" fill="clear" slot="start">
+    <ion-button (click)="IrAtras()" fill="clear" slot="start">
       <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
     </ion-button>
     <ion-title>Formulario Antecedentes Medicos</ion-title>
-    <ion-button routerLink="/diagnostico" fill="clear" slot="end">
+    <ion-button (click)="validateFormMedicos()" fill="clear" slot="end">
       <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid class="grid">
-    <ion-row>
-      <ion-col size="1">
-      </ion-col>
-      <ion-col size="4.5">
-        <ion-list>
-          <ion-item>
-            <ion-radio value="hipertensionArterial"></ion-radio>
-            <ion-label>Hipertension arterial</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-radio value="diabetesMellitus"></ion-radio>
-            <ion-label>Diabetes mellitus</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-radio value="Diabetes gestacional"></ion-radio>
-            <ion-label>Diabetes gestacional</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-radio value="Enfermedades tiroidales"></ion-radio>
-            <ion-label>Enfermedades tiroidales</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-radio value="Enfermedades cardiovasculares"></ion-radio>
-            <ion-label>Enfermedades cardiovasculares</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-radio value="Drogadicción"></ion-radio>
-            <ion-label>Drogadicción</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-radio value="Embarazo"></ion-radio>
-            <ion-label>Embarazo</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-radio value="VIH"></ion-radio>
-            <ion-label>VIH</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-radio value="Enfermedades gastrointestinales"></ion-radio>
-            <ion-label>Enfermedades gastrointestinales</ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-      <ion-col size="1">
-      </ion-col>
-      <ion-col size="4.5">
-        <ion-list>
-          <ion-item>
-            <ion-radio value="Alergias"></ion-radio>
-            <ion-label>Alergias</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-radio value="Sicologicos"></ion-radio>
-            <ion-label>Sicologicos</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-radio value="Obesidad"></ion-radio>
-            <ion-label>Obesidad</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-radio value="Desnutrición"></ion-radio>
-            <ion-label>Desnutrición</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-radio value="Sano"></ion-radio>
-            <ion-label>Sano</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-radio value="Fumador"></ion-radio>
-            <ion-label>Fumador</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Cigarros al dia:</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Observaciones:</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-      <ion-col size="1">
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <form [formGroup]="formMedicos"> <!--permite añadir las vaildaciones-->
+    <ion-grid class="grid">
+      <ion-row>
+        <ion-col size="1">
+        </ion-col>
+        <ion-col size="4.5">
+          <ion-list>
+            <ion-item>
+              <ion-checkbox formControlName="hipertensionArterial" ></ion-checkbox>
+              <ion-label>Hipertension arterial</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="diabetesMellitus" ></ion-checkbox>
+              <ion-label>Diabetes mellitus</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="diabetesGestacional" ></ion-checkbox>
+              <ion-label>Diabetes gestacional</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="enfermedadesTiroidales" ></ion-checkbox>
+              <ion-label>Enfermedades tiroidales</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="enfermedadesCardiovasculares" ></ion-checkbox>
+              <ion-label>Enfermedades cardiovasculares</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="drogadiccion" ></ion-checkbox>
+              <ion-label>Drogadicción</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="embarazo" ></ion-checkbox>
+              <ion-label>Embarazo</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="vih" [(ngModel)]="VIH"></ion-checkbox>
+              <ion-label>VIH</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="enfermedadesGastrointestinales" ></ion-checkbox>
+              <ion-label>Enfermedades gastrointestinales</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col size="1">
+        </ion-col>
+        <ion-col size="4.5">
+          <ion-list>
+            <ion-item>
+              <ion-checkbox formControlName="alergias" ></ion-checkbox>
+              <ion-label>Alergias</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="sicologicos" ></ion-checkbox>
+              <ion-label>Sicologicos</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="obesidad" ></ion-checkbox>
+              <ion-label>Obesidad</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="desnutricion" ></ion-checkbox>
+              <ion-label>Desnutrición</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="sano" ></ion-checkbox>
+              <ion-label>Sano</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="fumador" ></ion-checkbox>
+              <ion-label>Fumador</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Cigarros al dia:</ion-label>
+              <ion-input formControlName="cigarrosDia" ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Observaciones:</ion-label>
+              <ion-input formControlName="observaciones" ></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col size="1">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 
 </ion-content>

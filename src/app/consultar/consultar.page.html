@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Consultar Pacientes</ion-title>
+    <ion-button slot="end" routerLink="/mensajeria">Salir</ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -14,6 +15,9 @@
             <ion-item>
               <ion-label position="floating">Rango de edad:</ion-label>
               <ion-select okText="Seleccionar edad" cancelText="Cerrar">
+                <ion-select-option *ngFor="let rangoEdad of rangoEdadList$ | async"
+                [value]="rangoEdad.descripcion">{{rangoEdad.descripcion}}</ion-select-option>
+  
               </ion-select>
             </ion-item>
           </ion-list>
@@ -38,4 +42,33 @@
         <ion-button>Buscar</ion-button>
       </ion-col>
     </ion-row>
+
+    <ion-grid class="grid">
+      <ion-row>
+        <ion-col size="1">
+        </ion-col>
+        <ion-col size="2.5">
+          <div class="text">
+           Número Identificación
+          </div>
+        </ion-col>
+        <ion-col size="2.5">
+          <div class="text">
+          Nombre y Apellido
+          </div>
+        </ion-col>
+        <ion-col size="2.5">
+          <div class="text">
+          Dirección
+          </div>
+        </ion-col>
+        <ion-col size="2.5" text-center>
+          <div class="text">
+          Patología
+          </div>
+        </ion-col>
+        <ion-col size="1">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 </ion-content>

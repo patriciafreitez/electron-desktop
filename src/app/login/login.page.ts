@@ -8,6 +8,8 @@ import { Eps } from '../models/eps';
 import { EpsService } from '../service/db/eps.service';
 import { GeneroService } from '../service/db/genero.service';
 import { TipoDocumentoService } from '../service/db/tipo-documento.service';
+import { RangoEdad } from '../models/rango-edad';
+import { RangoEdadService } from '../service/db/rango-edad.service';
 
 @Component({
   selector: 'app-login',
@@ -22,58 +24,13 @@ export class LoginPage implements OnInit {
       private navController: NavController,
       private angularFireAuth: AngularFireAuth,
       private message: MessageService,
-      private storage: Storage,
-      private eps: EpsService,
-      private genero: GeneroService,
-      private tipodocumento: TipoDocumentoService) 
+      private storage: Storage
+      )
       
    {
-    var array: any=[
-      {
-        descripcion: "Contributivo"
-      },
-      {
-        descripcion: "Otro"
-      },
-      {
-        descripcion: "Ninguno"
-      }
-    ]
-    //eps.addAllEps(array);
-    var arrayGenero: any=[
-      {
-        descripcion: "Femenino"
-      },
-      {
-        descripcion: "Masculino"
-      }
-    ]
-    
-    
-    genero.addAllTipoDocumento(arrayTipoDocumento);
-    
-    var arrayTipoDocumento: any=[
-      {
-        descripcion: "Tarjeta de Identidad"
-      },
-      {
-        descripcion: "Registro Civil"
-      },
-      {
-        descripcion: "Cedula de Ciudadania"
-      },
-      {
-        descripcion: "Cedula de Extrangeria"
-      },
-      {
-        descripcion: "Pasaporte"
-      },
-      ]
-    
-
-
-
-    }
+   
+  
+  }
     
   
 
@@ -90,7 +47,7 @@ export class LoginPage implements OnInit {
     this.angularFireAuth.auth.signInWithEmailAndPassword(this.email, this.pass).then(res => {
       console.log(res);
       this.storage.set('email', this.email);
-      this.navController.navigateRoot(['home']);
+      this.navController.navigateRoot(['mensajeria']);
     }).catch( (error) => {
       console.log(error);
       switch (error.code) {

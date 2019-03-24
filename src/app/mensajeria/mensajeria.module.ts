@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DiagnosticoPage } from './diagnostico.page';
+import { MensajeriaPage } from './mensajeria.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: DiagnosticoPage
+    component: MensajeriaPage
   }
 ];
 
@@ -18,10 +18,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule, //permite hacer las validaciones
     IonicModule,
+    ReactiveFormsModule, //permite hacer las validaciones
     RouterModule.forChild(routes)
   ],
-  declarations: [DiagnosticoPage]
+  declarations: [MensajeriaPage]
 })
-export class DiagnosticoPageModule {}
+export class MensajeriaPageModule {}

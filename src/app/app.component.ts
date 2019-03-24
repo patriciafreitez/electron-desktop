@@ -35,7 +35,7 @@ export class AppComponent {
 
       this.angularFireAuth.auth.onAuthStateChanged((user) => {
         if (user) {
-           this.navController.navigateRoot(['home']);
+           this.navController.navigateRoot(['mensajeria']);
         } else {
           this.navController.navigateRoot(['']);
         }
