@@ -19,21 +19,21 @@
             <ion-label >C.O.P</ion-label>
           </ion-list-header>
           <ion-item>
-            <ion-label>Cariados:</ion-label>
+            <ion-label>* Cariados:</ion-label>
             <ion-input formControlName="cariados"></ion-input>
             <div *ngIf="!formDiagnostico.controls.cariados.valid && formSubmit">
               <small style = "color:red"> Campo Obligatorio</small>
             </div>
           </ion-item>
           <ion-item>
-            <ion-label>Opturados:</ion-label>
+            <ion-label>* Opturados:</ion-label>
             <ion-input formControlName="opturados"></ion-input>
             <div *ngIf="!formDiagnostico.controls.opturados.valid && formSubmit">
               <small style = "color:red"> Campo Obligatorio</small>
             </div>
           </ion-item>
           <ion-item>
-            <ion-label>Perdidos:</ion-label>
+            <ion-label>* Perdidos:</ion-label>
             <ion-input formControlName="perdidos"></ion-input>
             <div *ngIf="!formDiagnostico.controls.perdidos.valid && formSubmit">
               <small style = "color:red"> Campo Obligatorio</small>
@@ -58,9 +58,9 @@
               <ion-label>Patologia AMT</ion-label>
             </ion-item>
             <ion-item>
-              <ion-label>Mal posiciones:</ion-label>
-              <ion-input formControlName="malPosiciones"></ion-input>
-              <div *ngIf="!formDiagnostico.controls.malPosiciones.valid && formSubmit">
+              <ion-label>* Mal posiciones:</ion-label>
+              <ion-input formControlName="mal_posiciones"></ion-input>
+              <div *ngIf="!formDiagnostico.controls.mal_posiciones.valid && formSubmit">
                 <small style = "color:red"> Campo Obligatorio</small>
               </div>
             </ion-item>
@@ -78,15 +78,15 @@
               <ion-label>Onicofagia</ion-label>
             </ion-item>
             <ion-item>
-              <ion-checkbox  formControlName="succionLabial" ></ion-checkbox>
+              <ion-checkbox  formControlName="succion_labial" ></ion-checkbox>
               <ion-label>Succión labial</ion-label>
             </ion-item>
             <ion-item>
-              <ion-checkbox formControlName="succionDigital" ></ion-checkbox>
+              <ion-checkbox formControlName="succion_digital" ></ion-checkbox>
               <ion-label>Succión digital</ion-label>
             </ion-item>
             <ion-item>
-              <ion-checkbox formControlName="interposicionLingual" ></ion-checkbox>
+              <ion-checkbox formControlName="interposicion_lingual" ></ion-checkbox>
               <ion-label>Interposición lingual</ion-label>
             </ion-item>
             <div>

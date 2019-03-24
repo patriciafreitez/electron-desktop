@@ -79,23 +79,23 @@ export class HomePage implements OnInit {
       eps:                  ['', Validators.compose([Validators.required])],//valida que el campo sea obligatorio
       nombre:               ['', Validators.compose([Validators.required])],
       apellido:             ['', Validators.compose([Validators.required])],
-      tipoDocumento:        ['', Validators.compose([Validators.required])],
-      numeroIdentidad:      ['', Validators.compose([Validators.required])],
-      lugarNacimiento:      ['', Validators.compose([Validators.required])],
+      tipo_documento:       ['', Validators.compose([Validators.required])],
+      numero_identidad:     ['', Validators.compose([Validators.required])],
+      lugar_nacimiento:     ['', Validators.compose([Validators.required])],
       genero:               ['', Validators.compose([Validators.required])],
-      estadoCivil:          ['', Validators.compose([Validators.required])],
-      nivelEducacion:       ['', Validators.compose([Validators.required])],
-      historiaClinica:      ['', Validators.compose([Validators.required])],
-      fechaNacimiento:      ['', Validators.compose([Validators.required])],
+      estado_civil:         ['', Validators.compose([Validators.required])],
+      nivel_educacion:      ['', Validators.compose([Validators.required])],
+      historia_clinica:     ['', Validators.compose([Validators.required])],
+      fecha_nacimiento:     ['', Validators.compose([Validators.required])],
       fecha:                ['', Validators.compose([Validators.required])],
-      nivelSocioEconomico:  ['', Validators.compose([Validators.required])],
+      nivel_socioeconomico: ['', Validators.compose([Validators.required])],
       ocupacion:            ['', Validators.compose([Validators.required])],
-      telefonoCelular:      ['', Validators.compose([Validators.required])],
-      telefonoFijo:         ['', Validators.compose([Validators.required])],
+      telefono_celular:     ['', Validators.compose([Validators.required])],
+      telefono_fijo:        ['', Validators.compose([Validators.required])],
       correo:               [''],
       direccion:            ['', Validators.compose([Validators.required])],
       responsable:          [''],
-      telefonoResponsable:  ['']
+      telefono_responsable: ['']
     });
   }
 
@@ -104,23 +104,23 @@ export class HomePage implements OnInit {
     this.formPersonales.get('eps').setValue('subsidiado');
     this.formPersonales.get('nombre').setValue('jose');
     this.formPersonales.get('apellido').setValue('duin');
-    this.formPersonales.get('tipoDocumento').setValue('cedula');
-    this.formPersonales.get('numeroIdentidad').setValue('777987766');
-    this.formPersonales.get('lugarNacimiento').setValue('caracas');
+    this.formPersonales.get('tipo_documento').setValue('cedula');
+    this.formPersonales.get('numero_identidad').setValue('777987766');
+    this.formPersonales.get('lugar_nacimiento').setValue('caracas');
     this.formPersonales.get('genero').setValue('femenino');
-    this.formPersonales.get('estadoCivil').setValue('soltero');
-    this.formPersonales.get('nivelEducacion').setValue('Bachiller');
-    this.formPersonales.get('historiaClinica').setValue('8578967586');
-    this.formPersonales.get('fechaNacimiento').setValue('13/04/92');
+    this.formPersonales.get('estado_civil').setValue('soltero');
+    this.formPersonales.get('nivel_educacion').setValue('Bachiller');
+    this.formPersonales.get('historia_clinica').setValue('8578967586');
+    this.formPersonales.get('fecha_nacimiento').setValue('13/04/92');
     this.formPersonales.get('fecha').setValue('22/03/19');
-    this.formPersonales.get('nivelSocioEconomico').setValue('alto');
+    this.formPersonales.get('nivel_socioeconomico').setValue('alto');
     this.formPersonales.get('ocupacion').setValue('ingeniero');
-    this.formPersonales.get('telefonoCelular').setValue('8576567567');
-    this.formPersonales.get('telefonoFijo').setValue('857659877');
+    this.formPersonales.get('telefono_celular').setValue('8576567567');
+    this.formPersonales.get('telefono_fijo').setValue('857659877');
     this.formPersonales.get('correo').setValue('hola@');
     this.formPersonales.get('direccion').setValue('españa');
     this.formPersonales.get('responsable').setValue('juana la cubana');
-    this.formPersonales.get('telefonoResponsable').setValue('766856798');
+    this.formPersonales.get('telefono_responsable').setValue('766856798');
 
 
     if(this.formPersonales.valid) {
@@ -149,8 +149,29 @@ export class HomePage implements OnInit {
         if (form == undefined ){
           form2 = {}
         }
-        form2.formPersonales = this.formPersonales.value;
-
+        const value = this.formPersonales.value;
+        form2.formPersonales = {
+          eps:                  value.eps,
+          nombre:               value.nombre,
+          apellido:             value.apellido,
+          tipo_documento:       value.tipo_documento,
+          numero_identidad:     value.numero_identidad,
+          lugar_nacimiento:     value.lugar_nacimiento,
+          genero:               value.genero,
+          estado_civil:         value.estado_civil,
+          nivel_educacion:      value.nivel_educacion,
+          historia_clinica:     value.historia_clinica,
+          fecha_nacimiento:     value.fecha_nacimiento,
+          fecha:                value.fecha,
+          nivel_socioeconomico: value.nivel_socioeconomico,
+          ocupacion:            value.ocupacion,
+          telefono_celular:     value.telefono_celular,
+          telefono_fijo:        value.telefono_fijo,
+          correo:               value.correo === undefined ? '' : value.correo,
+          direccion:            value.direccion,
+          responsable:          value.responsable === undefined ? '' : value.responsable,
+          telefono_responsable: value.telefono_responsable === undefined ? '' : value.telefono_responsable
+        }
         this.storage.set('form', form2).then(data=>{
           resolve(data);
         });// aqui guarda los datos asignados   

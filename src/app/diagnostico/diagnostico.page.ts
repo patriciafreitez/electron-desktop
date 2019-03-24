@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
+import { PacienteService } from '../service/db/paciente.service';
 
 
 @Component({
@@ -13,25 +14,17 @@ export class DiagnosticoPage implements OnInit {
   public formDiagnostico: FormGroup;
   public formSubmit = false;
 
-  Gingivitis = false;
-  Patologia = false;
-  Onicofagia = false;
-  SuccionLabial = false;
-  SuccionDigital = false;
-  InterposicionLingual = false;
-
-
   constructor(
     private formBuilder: FormBuilder,//libreria a importar
     private navController: NavController,
     private storage: Storage,
+    private pacienteService: PacienteService
   ) { 
     this.loadParams();
     this.construirValidaciones();
   }
   loadParams() {//se guardan los datos de la pantalla pasada para sobre escribir enn formulario data
     this.storage.get('form').then(form => {
-      console.log(form);
       if(form.formDiagnostico !== undefined) {
         const formDiagnostico = form.formDiagnostico;
         this.formDiagnostico.get('cariados').setValue(formDiagnostico.cariados);
@@ -40,30 +33,27 @@ export class DiagnosticoPage implements OnInit {
         this.formDiagnostico.get('periodontitis').setValue(formDiagnostico.periodontitis);
         this.formDiagnostico.get('patologia').setValue(formDiagnostico.patologia);
         this.formDiagnostico.get('gingivitis').setValue(formDiagnostico.gingivitis);
-        this.formDiagnostico.get('malPosiciones').setValue(formDiagnostico.malPosiciones);
+        this.formDiagnostico.get('mal_posiciones').setValue(formDiagnostico.mal_posiciones);
         this.formDiagnostico.get('onicofagia').setValue(formDiagnostico.onicofagia);
-        this.formDiagnostico.get('succionLabial').setValue(formDiagnostico.succionLabial);
-        this.formDiagnostico.get('succionDigital').setValue(formDiagnostico.succionDigital);
-        this.formDiagnostico.get('interposicionLingual').setValue(formDiagnostico.interposicionLingual);
+        this.formDiagnostico.get('succion_labial').setValue(formDiagnostico.succion_labial);
+        this.formDiagnostico.get('succion_digital').setValue(formDiagnostico.succion_digital);
+        this.formDiagnostico.get('interposicion_lingual').setValue(formDiagnostico.interposicion_lingual);
       }
     });
   }
   construirValidaciones() {
     this.formDiagnostico = this.formBuilder.group({ 
-      cariados:      ['', Validators.compose([Validators.required])],
-      opturados:     ['', Validators.compose([Validators.required])],
-      perdidos:      ['', Validators.compose([Validators.required])],
-      periodontitis: [false],//false xq son checkboox
-      patologia:     [''],
-      gingivitis:    [''],
-      malPosiciones: ['', Validators.compose([Validators.required])],
-      onicofagia:    [''],
-      succionLabial: [''],
-      succionDigital:[''],
-      interposicionLingual:    ['']
-
-
-
+      cariados:             ['', Validators.compose([Validators.required])],
+      opturados:            ['', Validators.compose([Validators.required])],
+      perdidos:             ['', Validators.compose([Validators.required])],
+      periodontitis:        [false],//false xq son checkboox
+      patologia:            [false],
+      gingivitis:           [false],
+      mal_posiciones:       ['', Validators.compose([Validators.required])],
+      onicofagia:           [false],
+      succion_labial:       [false],
+      succion_digital:      [false],
+      interposicion_lingual:[false]
     });
   }
   IrAtras() {
@@ -71,10 +61,24 @@ export class DiagnosticoPage implements OnInit {
       this.navController.navigateBack('medicos');
     })
   }
+
   guardarForm(){
     return new Promise((resolve, reject)=>{
       this.storage.get("form").then((form: any) =>{
-        form.formDiagnostico = this.formDiagnostico.value;
+        const value = this.formDiagnostico.value;
+        form.formDiagnostico = {
+          cariados:             value.cariados,
+          opturados:            value.opturados,
+          perdidos:             value.perdidos,
+          periodontitis:        value.periodontitis === undefined ? false : value.periodontitis,
+          patologia:            value.patologia === undefined ? false : value.patologia,
+          gingivitis:           value.gingivitis === undefined ? false : value.gingivitis,
+          mal_posiciones:       value.mal_posiciones,
+          onicofagia:           value.onicofagia === undefined ? false : value.onicofagia,
+          succion_labial:       value.succion_labial === undefined ? false : value.succion_labial,
+          succion_digital:      value.succion_digital === undefined ? false : value.succion_digital,
+          interposicion_lingual:value.interposicion_lingual === undefined ? false : value.interposicion_lingual
+        }
         this.storage.set('form', form).then(data=>{
           resolve(data);
         });// aqui guarda los datos asignados   
@@ -82,8 +86,26 @@ export class DiagnosticoPage implements OnInit {
     })
    
   }
+  
   registrar(){
-    
+    if(this.formDiagnostico.valid) {
+
+    this.guardarForm().then((data)=>{
+      console.log(data);
+      var user: any = {};
+      for(let key in data){
+        for(let key2 in data[key]){
+          user[key2] = data[key][key2]
+        }
+      }
+    console.log(user);
+    this.pacienteService.addAllPaciente([user]);
+
+     // this.navController.navigateBack('medicos');
+    })
+    } else {
+      this.formSubmit = true; // controla que el mensaje salga cuando intenta cambiar de pantalla
+    }
   }
   ngOnInit() {
   }
