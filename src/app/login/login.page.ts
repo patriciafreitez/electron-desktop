@@ -10,6 +10,8 @@ import { GeneroService } from '../service/db/genero.service';
 import { TipoDocumentoService } from '../service/db/tipo-documento.service';
 import { RangoEdad } from '../models/rango-edad';
 import { RangoEdadService } from '../service/db/rango-edad.service';
+import { NivelSocioeconomico } from '../models/nivel-socioeconomico';
+import { NivelSocioeconomicoService } from '../service/db/nivel-socioeconomico.service';
 
 @Component({
   selector: 'app-login',
@@ -24,12 +26,24 @@ export class LoginPage implements OnInit {
       private navController: NavController,
       private angularFireAuth: AngularFireAuth,
       private message: MessageService,
-      private storage: Storage
+      private storage: Storage,
+      private nivelsocioeconomicoservice: NivelSocioeconomicoService,
+      private nivelsocioeconomico: NivelSocioeconomico
       )
-      
    {
-   
-  
+
+   var arrayNivelSocioeconomico : any = {
+    {
+      descripcion: "Alto"
+    },
+    {
+      descripcion: "Medio"
+    },
+    {
+      descripcion: "Bajo"
+    }
+   }
+   nivelsocioeconomicoservice.addNivelSocioeconomico(arrayNivelSocioeconomico);
   }
     
   

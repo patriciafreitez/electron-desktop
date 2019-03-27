@@ -89,7 +89,7 @@
               <ion-label position="floating">* Estado Civil:</ion-label>
               <ion-select formControlName="estado_civil" okText="Seleccionar" cancelText="Cerrar">
                 <ion-select-option *ngFor="let estado_civil of estado_civil$ | async"
-                                  [value]="estado_civil.descripcion">{{estado_civil.descripcion}}</ion-select-option>
+                  [value]="estado_civil.descripcion">{{estado_civil.descripcion}}</ion-select-option>
               </ion-select>
               <div *ngIf="!formPersonales.controls.estado_civil.valid && formSubmit">
                 <small style = "color:red"> Campo Obligatorio</small>
@@ -97,9 +97,11 @@
             </ion-item>
             <ion-item> 
               <ion-label position="floating">* Nivel Educativo:</ion-label>
-              <ion-select formControlName="nivel_educacion" okText="Seleccionar" cancelText="Cerrar">
+              <ion-select formControlName="nivel_educativo" okText="Seleccionar" cancelText="Cerrar">
+                  <ion-select-option *ngFor="let nivel_educativo of nivel_educativo$ | async"
+                  [value]="nivel_educativo.descripcion">{{nivel_educativo.descripcion}}</ion-select-option>
               </ion-select>
-              <div *ngIf="!formPersonales.controls.nivel_educacion.valid && formSubmit">
+              <div *ngIf="!formPersonales.controls.nivel_educativo.valid && formSubmit">
                 <small style = "color:red"> Campo Obligatorio</small>
               </div>
             </ion-item>
@@ -125,8 +127,12 @@
             </ion-item>
             <ion-item> 
               <ion-label position="floating">* Nivel Socioeconomico:</ion-label>
+
               <ion-select formControlName="nivel_socioeconomico" okText="Seleccionar" cancelText="Cerrar">
+                  <ion-select-option *ngFor="let nivel_socioeconomico of nivel_socioeconomico$ | async"
+                  [value]="nivel_socioeconomico.descripcion">{{nivel_socioeconomico.descripcion}}</ion-select-option>
               </ion-select>
+
               <div *ngIf="!formPersonales.controls.nivel_socioeconomico.valid && formSubmit">
                 <small style = "color:red"> Campo Obligatorio</small>
               </div>

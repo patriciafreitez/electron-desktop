@@ -13,6 +13,10 @@ import { Genero } from '../models/genero';
 import { GeneroService } from '../service/db/genero.service';
 import { TipoDocumento } from '../models/tipo-documento';
 import { TipoDocumentoService } from '../service/db/tipo-documento.service';
+import { NivelEducativoService } from '../service/db/nivel-educativo.service';
+import { NivelEducativo } from '../models/nivel-educativo';
+import { NivelSocioeconomicoService } from '../service/db/nivel-socioeconomico.service';
+import { NivelSocioeconomico } from '../models/nivel-socioeconomico';
 import { RangoEdadService } from '../service/db/rango-edad.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RangoEdad } from '../models/rango-edad';
@@ -31,6 +35,8 @@ export class HomePage implements OnInit {
   public epsList$: Observable<Eps[]>;
   public generoList$: Observable<Genero[]>; 
   public tipoDocumentoList$: Observable<TipoDocumento[]>;
+  public nivelEducativoList$: Observable<NivelEducativo[]>;
+  public nivelSocioeconomicoList$: Observable<NivelSocioeconomico[]>;
 
   constructor(
     public userService: UserService,
@@ -41,6 +47,9 @@ export class HomePage implements OnInit {
     private generoService: GeneroService,
     private formBuilder: FormBuilder,
     private tipoDocumentoService: TipoDocumentoService,
+    private nivelEducativoService: NivelEducativoService,
+    private nivelSocioeconomicoService: NivelSocioeconomicoService,
+
 
   ) {
     this.construirValidaciones()
@@ -84,7 +93,7 @@ export class HomePage implements OnInit {
       lugar_nacimiento:     ['', Validators.compose([Validators.required])],
       genero:               ['', Validators.compose([Validators.required])],
       estado_civil:         ['', Validators.compose([Validators.required])],
-      nivel_educacion:      ['', Validators.compose([Validators.required])],
+      nivel_educativo:      ['', Validators.compose([Validators.required])],
       historia_clinica:     ['', Validators.compose([Validators.required])],
       fecha_nacimiento:     ['', Validators.compose([Validators.required])],
       fecha:                ['', Validators.compose([Validators.required])],
@@ -109,7 +118,7 @@ export class HomePage implements OnInit {
     this.formPersonales.get('lugar_nacimiento').setValue('caracas');
     this.formPersonales.get('genero').setValue('femenino');
     this.formPersonales.get('estado_civil').setValue('soltero');
-    this.formPersonales.get('nivel_educacion').setValue('Bachiller');
+    this.formPersonales.get('nivel_educativo').setValue('Bachiller');
     this.formPersonales.get('historia_clinica').setValue('8578967586');
     this.formPersonales.get('fecha_nacimiento').setValue('13/04/92');
     this.formPersonales.get('fecha').setValue('22/03/19');
@@ -140,6 +149,7 @@ export class HomePage implements OnInit {
     this._loadEps();
     this._loadGenero();
     this._loadTipoDocumento();
+    this._loadNivelEducativo();
 
   }
   guardarForm(){
@@ -159,7 +169,7 @@ export class HomePage implements OnInit {
           lugar_nacimiento:     value.lugar_nacimiento,
           genero:               value.genero,
           estado_civil:         value.estado_civil,
-          nivel_educacion:      value.nivel_educacion,
+          nivel_educativo:      value.nivel_educativo,
           historia_clinica:     value.historia_clinica,
           fecha_nacimiento:     value.fecha_nacimiento,
           fecha:                value.fecha,
@@ -192,8 +202,12 @@ export class HomePage implements OnInit {
   _loadTipoDocumento() {
     this.tipoDocumentoList$ = this.tipoDocumentoService.getTipoDocumentoList().valueChanges();
   }
-  
-
+  _loadNivelEducativo() {
+    this.nivelEducativoList$ = this.nivelEducativoService.getNivelEducativoList().valueChanges();
+  }  
+  _loadNivelSocioeconomico() {
+    this.nivelSocioeconomicoList$ = this.nivelSocioeconomicoService.getNivelSocioeconomicoList().valueChanges();
+  }
   
 
 
