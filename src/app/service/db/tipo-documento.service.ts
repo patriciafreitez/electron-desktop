@@ -14,25 +14,20 @@ export class TipoDocumentoService {
  getTipoDocumentoList() {
    return this.tipoDocumentoListRef;
  }
-
  filterByDescripcion(descripcion: string) {
    return this.db.list('/tipo-documento-list', ref => ref.orderByChild('descripcion').equalTo(descripcion));
  }
-
  addTipoDocumento(tipoDocumento: TipoDocumento) {
    return this.tipoDocumentoListRef.push(tipoDocumento);
  }
-
  addAllTipoDocumento(tipoDocumento: any) {
   tipoDocumento.forEach((element:TipoDocumento) => {
     this. addTipoDocumento(element)
     });
   }
-
  editTipoDocumento(tipoDocumento: TipoDocumento) {
    return this.tipoDocumentoListRef.update(tipoDocumento.key, tipoDocumento);
  }
-
  removeTipoDocumento(tipoDocumento: TipoDocumento) {
    return this.tipoDocumentoListRef.remove(tipoDocumento.key);
  }

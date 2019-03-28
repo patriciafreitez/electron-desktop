@@ -13,19 +13,20 @@ export class EstadoCivilService {
   getEstadoCivilList() {
     return this.estadoCivilListRef;
   }
-
   filterByDescripcion(descripcion: string) {
     return this.db.list('/estado-civil-list', ref => ref.orderByChild('descripcion').equalTo(descripcion));
   }
-
   addEstadoCivil(estadoCivil: EstadoCivil) {
     return this.estadoCivilListRef.push(estadoCivil);
   }
-
+  addAllEstadoCivil(estadoCivil: any){
+    estadoCivil.forEach((element:EstadoCivil) => {
+      this.addEstadoCivil(element)
+    });
+  }
   editEstadoCivil(estadoCivil: EstadoCivil) {
     return this.estadoCivilListRef.update(estadoCivil.key, estadoCivil);
   }
-
   removeEstadoCivil(estadoCivil: EstadoCivil) {
     return this.estadoCivilListRef.remove(estadoCivil.key);
   }
