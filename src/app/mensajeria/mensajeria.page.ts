@@ -115,7 +115,7 @@ export class MensajeriaPage implements OnInit {
         descripcion: "Universitario"
       }
     ]
-  nivelsocioeconomico.addNivelSocioeconomico(arrayNivelSocioeconomico);
+  niveleducativo.addNivelEducativo(arrayNivelEducativo);
   }
   
   ngOnInit() {}
