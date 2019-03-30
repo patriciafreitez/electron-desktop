@@ -20,6 +20,8 @@ import { NivelSocioeconomico } from '../models/nivel-socioeconomico';
 import { RangoEdadService } from '../service/db/rango-edad.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RangoEdad } from '../models/rango-edad';
+import { AntecedenteMedicoService } from '../service/db/antecedente-medico.service';
+import { AntecedenteMedico } from '../models/antecedente-medico';
 
 @Component({
   selector: 'app-home',
@@ -37,6 +39,7 @@ export class HomePage implements OnInit {
   public tipoDocumentoList$: Observable<TipoDocumento[]>;
   public nivelEducativoList$: Observable<NivelEducativo[]>;
   public nivelSocioeconomicoList$: Observable<NivelSocioeconomico[]>;
+  public antecedenteMedicoList$: Observable<AntecedenteMedico[]>;
 
   constructor(
     public userService: UserService,
@@ -49,7 +52,7 @@ export class HomePage implements OnInit {
     private tipoDocumentoService: TipoDocumentoService,
     private nivelEducativoService: NivelEducativoService,
     private nivelSocioeconomicoService: NivelSocioeconomicoService,
-
+    private antecedenteMedicoService: AntecedenteMedicoService,
 
   ) {
     this.construirValidaciones()
@@ -150,6 +153,9 @@ export class HomePage implements OnInit {
     this._loadGenero();
     this._loadTipoDocumento();
     this._loadNivelEducativo();
+    this._loadNivelSocioeconomico();
+    this._loadTipoDocumento();
+    this._loadAntecedenteMedico();
 
   }
   guardarForm(){
@@ -208,9 +214,7 @@ export class HomePage implements OnInit {
   _loadNivelSocioeconomico() {
     this.nivelSocioeconomicoList$ = this.nivelSocioeconomicoService.getNivelSocioeconomicoList().valueChanges();
   }
-  
-
-
-  
-
+  _loadAntecedenteMedico() {
+    this.antecedenteMedicoList$ = this.antecedenteMedicoService.getAntecedenteMedicoList().valueChanges();
+  }
 }

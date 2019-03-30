@@ -4,7 +4,9 @@ import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { resolve } from 'url';
 import { reject } from 'q';
-
+import { ActivatedRoute } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AntecedenteMedicoService } from '../service/db/antecedente-medico.service';
 
 @Component({
   selector: 'app-medicos',
@@ -31,9 +33,12 @@ export class MedicosPage implements OnInit {
   Fumador = false;
 
   constructor(
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder,//libreria a importar
     private navController: NavController,
     private storage: Storage,
+    private angularFireAuth: AngularFireAuth,
+    private antecedentemedico: AntecedenteMedicoService,
 
   ) { 
     this.loadParams();

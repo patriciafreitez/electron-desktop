@@ -41,7 +41,7 @@ export class MensajeriaPage implements OnInit {
         descripcion: "Ninguno"
       }
     ] 
-    //eps.addAllEps(arrayEps);
+    eps.addAllEps(arrayEps);
 
     var arrayEstadoCivil: any=[
       {
@@ -57,7 +57,7 @@ export class MensajeriaPage implements OnInit {
         descripcion: "Viudo"
       }
     ] 
-    //estadocivil.addAllEstadoCivil(arrayEstadoCivil);
+    estadocivil.addAllEstadoCivil(arrayEstadoCivil);
 
     var arrayGenero: any=[
       {
@@ -67,7 +67,7 @@ export class MensajeriaPage implements OnInit {
         descripcion: "Masculino"
       }
     ]
-    //genero.addAllGenero(arrayGenero);
+    genero.addAllGenero(arrayGenero);
     
     var arrayTipoDocumento: any=[
       {
@@ -86,7 +86,7 @@ export class MensajeriaPage implements OnInit {
         descripcion: "Pasaporte"
       },
     ]
-    //tipodocumento.addAllTipoDocumento(arrayTipoDocumento);
+    tipodocumento.addAllTipoDocumento(arrayTipoDocumento);
     
     var arrayNivelSocioeconomico : any = [
       {
@@ -99,7 +99,7 @@ export class MensajeriaPage implements OnInit {
         descripcion: "Bajo"
       }
     ]
-    //nivelsocioeconomico.addNivelSocioeconomico(arrayNivelSocioeconomico);
+    nivelsocioeconomico.addNivelSocioeconomico(arrayNivelSocioeconomico);
   
    var arrayNivelEducativo : any = [
       {
@@ -115,7 +115,7 @@ export class MensajeriaPage implements OnInit {
         descripcion: "Universitario"
       }
     ]
-  //niveleducativo.addNivelEducativo(arrayNivelEducativo);
+  niveleducativo.addNivelEducativo(arrayNivelEducativo);
   }
   
   ngOnInit() {}

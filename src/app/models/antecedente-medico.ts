@@ -1,4 +1,4 @@
-export class Eps {
+export class AntecedenteMedico {
     key?: string;
     descripcion: string;
 }
