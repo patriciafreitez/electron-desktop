@@ -20,7 +20,7 @@ export class NivelSocioeconomicoService {
    return this.nivelSocioeconomicoListRef.push(nivelSocioeconomico);
  }
  addAllNivelSocioeconomico(nivelSocioeconomico: any) {
-  nivelSocioeconomico.forEach((element:NivelSocioeconomico) => {
+  nivelSocioeconomico.forEach((element:any) => {
     this. addNivelSocioeconomico(element)
     });
   }

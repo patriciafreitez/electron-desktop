@@ -16,7 +16,7 @@ export class NivelEducativoService {
   filterByDescripcion(descripcion: string) {
     return this.db.list('/nivel-educativo-list', ref => ref.orderByChild('descripcion').equalTo(descripcion));
   }
-  addNivelEducativo(nivelEducativo: NivelEducativo) {
+  addNivelEducativo(nivelEducativo: any) {
     return this.nivelEducativoListRef.push(nivelEducativo);
   }
   addAllNivelEducativo(nivelEducativo: any){
