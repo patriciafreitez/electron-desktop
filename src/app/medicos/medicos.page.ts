@@ -4,9 +4,13 @@ import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { resolve } from 'url';
 import { reject } from 'q';
+import { Observable } from 'rxjs';
+
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+
 import { AntecedenteMedicoService } from '../service/db/antecedente-medico.service';
+import { AntecedenteMedico } from '../models/antecedente-medico';
 
 @Component({
   selector: 'app-medicos',
@@ -16,6 +20,8 @@ import { AntecedenteMedicoService } from '../service/db/antecedente-medico.servi
 export class MedicosPage implements OnInit {
   public formMedicos: FormGroup;
   public formSubmit = false;
+
+  public AntecendetesMedicosList$: Observable<AntecedenteMedico[]>;
 
   hipertensionArterial = false;
   diabetesMellitus = false;
@@ -38,7 +44,8 @@ export class MedicosPage implements OnInit {
     private navController: NavController,
     private storage: Storage,
     private angularFireAuth: AngularFireAuth,
-    private antecedentemedico: AntecedenteMedicoService,
+
+    private antecedenteMedicoService: AntecedenteMedicoService,
 
   ) { 
     this.loadParams();
@@ -139,6 +146,10 @@ export class MedicosPage implements OnInit {
   }
 
   ngOnInit() {
+    this._loadAntecenteMedico();
+  }
+  _loadAntecenteMedico() {
+    this.AntecendetesMedicosList$ = this.antecedenteMedicoService.getAntecedenteMedicoList().valueChanges();
   }
 
 }

@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import {AngularFireDatabase} from '@angular/fire/database';
-import {TipoDocumento} from '../../models/tipo-documento';
+import { TipoDocumento } from 'src/app/models/tipo-documento';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class TipoDocumentoService {
+
   private tipoDocumentoListRef = this.db.list<TipoDocumento>('tipo-documento-list');
 
  constructor(private db: AngularFireDatabase) { }
-
  getTipoDocumentoList() {
    return this.tipoDocumentoListRef;
  }
@@ -21,14 +20,18 @@ export class TipoDocumentoService {
    return this.tipoDocumentoListRef.push(tipoDocumento);
  }
  addAllTipoDocumento(tipoDocumento: any) {
+  console.log('addAllTipoDocumento')
   tipoDocumento.forEach((element:TipoDocumento) => {
-    this. addTipoDocumento(element)
+    console.log('addAllTipoDocumento_for')
+    this.addTipoDocumento(element)
     });
   }
  editTipoDocumento(tipoDocumento: TipoDocumento) {
+  console.log('addAllTipoDocumento', tipoDocumento)
    return this.tipoDocumentoListRef.update(tipoDocumento.key, tipoDocumento);
  }
  removeTipoDocumento(tipoDocumento: TipoDocumento) {
    return this.tipoDocumentoListRef.remove(tipoDocumento.key);
  }
+ 
 }

@@ -11,7 +11,7 @@ export class GeneroService {
 
   constructor(private db: AngularFireDatabase) { }
 
-  getGenero() {
+  getGeneroList() {
     return this.generoListRef;
   }
 

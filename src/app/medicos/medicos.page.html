@@ -19,7 +19,16 @@
         <ion-col size="4.5">
           <ion-list>
             <ion-item>
-              <ion-checkbox formControlName="hipertension_arterial" ></ion-checkbox>
+                  
+              
+
+              <ion-checkbox formControlName="hipertension_arterial" >
+                  <ion-select-option *ngFor="let antecente_medico of antecedente_medico$ | async"
+                  [value]="antecedente_medico.descripcion">{{antecente_medico.descripcion}}</ion-select-option>
+
+
+  
+              </ion-checkbox>
               <ion-label>Hipertension arterial</ion-label>
             </ion-item>
             <ion-item>

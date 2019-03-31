@@ -30,92 +30,52 @@ export class MensajeriaPage implements OnInit {
     private niveleducativo: NivelEducativoService,
 
   ) 
-  { var arrayEps: any=[
-      {
-        descripcion: "Contributivo"
-      },
-      {
-        descripcion: "Otro"
-      },
-      {
-        descripcion: "Ninguno"
-      }
+  { 
+    var arrayEps: any=[
+      { descripcion: "Subsidiado" },
+      { descripcion: "Contributivo" },
+      { descripcion: "Otro" },
+      { descripcion: "Ninguno" },
     ] 
-    eps.addAllEps(arrayEps);
+    //eps.addAllEps(arrayEps);
 
-    var arrayEstadoCivil: any=[
-      {
-        descripcion: "Soltero"
-      },
-      {
-        descripcion: "Casado"
-      },
-      {
-        descripcion: "Union libre"
-      },
-      {
-        descripcion: "Viudo"
-      }
-    ] 
-    estadocivil.addAllEstadoCivil(arrayEstadoCivil);
+    var arrayTipoDocumento: any=[
+      { descripcion: "Tarjeta de Identidad" },
+      { descripcion: "Registro Civil" },
+      { descripcion: "Cedula de Ciudadania" },
+      { descripcion: "Cedula de Extrangeria" },
+      { descripcion: "Pasaporte" },
+    ]
+    //tipodocumento.addAllTipoDocumento(arrayTipoDocumento);
 
     var arrayGenero: any=[
-      {
-        descripcion: "Femenino"
-      },
-      {
-        descripcion: "Masculino"
-      }
+      { descripcion: "Masculino" },
+      { descripcion: "Femenino" },
     ]
-    genero.addAllGenero(arrayGenero);
-    
-    var arrayTipoDocumento: any=[
-      {
-        descripcion: "Tarjeta de Identidad"
-      },
-      {
-        descripcion: "Registro Civil"
-      },
-      {
-        descripcion: "Cedula de Ciudadania"
-      },
-      {
-        descripcion: "Cedula de Extrangeria"
-      },
-      {
-        descripcion: "Pasaporte"
-      },
-    ]
-    tipodocumento.addAllTipoDocumento(arrayTipoDocumento);
-    
-    var arrayNivelSocioeconomico : any = [
-      {
-        descripcion: "Alto"
-      },
-      {
-        descripcion: "Medio"
-      },
-      {
-        descripcion: "Bajo"
-      }
+    //genero.addAllGenero(arrayGenero);
+
+    var arrayEstadoCivil: any=[
+      { descripcion: "Soltero" },
+      { descripcion: "Casado" },
+      { descripcion: "Union libre" },
+      { descripcion: "Viudo" },
+    ] 
+    //estadocivil.addAllEstadoCivil(arrayEstadoCivil);
+
+    var arrayNivelSocioeconomico: any=[
+      { descripcion: "Alto" },
+      { descripcion: "Medio" },
+      { descripcion: "Bajo" },
     ]
     nivelsocioeconomico.addNivelSocioeconomico(arrayNivelSocioeconomico);
   
-   var arrayNivelEducativo : any = [
-      {
-        descripcion: "Primaria"
-      },
-      {
-        descripcion: "Secundaria"
-      },
-      {
-        descripcion: "Tecnico"
-      },
-      {
-        descripcion: "Universitario"
-      }
+    var arrayNivelEducativo: any=[
+      { descripcion: "Primaria" },
+      { descripcion: "Secundaria" },
+      { descripcion: "Tecnico" },
+      { descripcion: "Universitario" },
     ]
-  niveleducativo.addNivelEducativo(arrayNivelEducativo);
+    niveleducativo.addNivelEducativo(arrayNivelEducativo);
   }
   
   ngOnInit() {}

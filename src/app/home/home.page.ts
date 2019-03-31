@@ -1,25 +1,28 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController} from '@ionic/angular';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {EstadoCivilService} from '../service/db/estado-civil.service';
-import {EstadoCivil} from '../models/estado-civil';
 import {Observable} from 'rxjs';
 import {UserService} from '../service/db/user.service';
 import {ActivatedRoute} from '@angular/router';
 import { Storage } from '@ionic/storage';//importar manual
+
 import { Eps } from '../models/eps';
 import { EpsService } from '../service/db/eps.service';
-import { Genero } from '../models/genero';
-import { GeneroService } from '../service/db/genero.service';
 import { TipoDocumento } from '../models/tipo-documento';
 import { TipoDocumentoService } from '../service/db/tipo-documento.service';
-import { NivelEducativoService } from '../service/db/nivel-educativo.service';
-import { NivelEducativo } from '../models/nivel-educativo';
+import { Genero } from '../models/genero';
+import { GeneroService } from '../service/db/genero.service';
+import { EstadoCivilService } from '../service/db/estado-civil.service';
+import { EstadoCivil } from '../models/estado-civil';
 import { NivelSocioeconomicoService } from '../service/db/nivel-socioeconomico.service';
 import { NivelSocioeconomico } from '../models/nivel-socioeconomico';
-import { RangoEdadService } from '../service/db/rango-edad.service';
+import { NivelEducativoService } from '../service/db/nivel-educativo.service';
+import { NivelEducativo } from '../models/nivel-educativo';
+
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { RangoEdadService } from '../service/db/rango-edad.service';
 import { RangoEdad } from '../models/rango-edad';
+
 import { AntecedenteMedicoService } from '../service/db/antecedente-medico.service';
 import { AntecedenteMedico } from '../models/antecedente-medico';
 
@@ -32,26 +35,28 @@ export class HomePage implements OnInit {
   private formularioData: any = {};
   public formPersonales: FormGroup;
   public formSubmit = false;
-
-  public estadoCivilList$: Observable<EstadoCivil[]>;
+  
   public epsList$: Observable<Eps[]>;
-  public generoList$: Observable<Genero[]>; 
   public tipoDocumentoList$: Observable<TipoDocumento[]>;
-  public nivelEducativoList$: Observable<NivelEducativo[]>;
+  public generoList$: Observable<Genero[]>; 
+  public estadoCivilList$: Observable<EstadoCivil[]>;
   public nivelSocioeconomicoList$: Observable<NivelSocioeconomico[]>;
-  public antecedenteMedicoList$: Observable<AntecedenteMedico[]>;
+  public nivelEducativoList$: Observable<NivelEducativo[]>;
 
   constructor(
     public userService: UserService,
-    private estadoService: EstadoCivilService,
     private navController: NavController,
     private storage: Storage,//importar manual
-    private epsService: EpsService,
-    private generoService: GeneroService,
     private formBuilder: FormBuilder,
+
+    private epsService: EpsService,
     private tipoDocumentoService: TipoDocumentoService,
-    private nivelEducativoService: NivelEducativoService,
+    private generoService: GeneroService,    
+    private estadoCivilService: EstadoCivilService,
     private nivelSocioeconomicoService: NivelSocioeconomicoService,
+    private nivelEducativoService: NivelEducativoService,
+
+    private rangoEdad: RangoEdadService,
     private antecedenteMedicoService: AntecedenteMedicoService,
 
   ) {
@@ -63,27 +68,9 @@ export class HomePage implements OnInit {
     });
 
     var array: any=[
-      {
-        descripcion: "0 - 10", min: 0, max: 10
-      },
-
-      {
-        descripcion: "11 - 17", min: 11, max: 17
-      },
-      {
-        descripcion: "18 - 30", min: 18, max: 30
-      },
-      {
-        descripcion: "31 - 50", min: 31, max: 50
-      },
-      {
-        descripcion: "51 - 70", min: 51, max: 70
-      },
-      {
-        descripcion: "mayores de 71", min: 71, max: 200
-      }
+      { descripcion: "5 - 12", min: 5, max: 12 },
+      { descripcion: "12 - más", min: 12, max: 100}
     ]
-
     //rangoEdad.addAllRangoEdad(array); 
   }
   construirValidaciones(){
@@ -148,14 +135,12 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    this._loadEstadoCivil();
     this._loadEps();
+    this._loadTipoDocumento();
     this._loadGenero();
-    this._loadTipoDocumento();
-    this._loadNivelEducativo();
+    this._loadEstadoCivil();
     this._loadNivelSocioeconomico();
-    this._loadTipoDocumento();
-    this._loadAntecedenteMedico();
+    this._loadNivelEducativo();
 
   }
   guardarForm(){
@@ -196,25 +181,23 @@ export class HomePage implements OnInit {
    
   }
 
-  _loadEstadoCivil() {
-    this.estadoCivilList$ = this.estadoService.getEstadoCivilList().valueChanges();
-  }
+
   _loadEps(){
     this.epsList$ = this.epsService.getEpsList().valueChanges();
-  }
-  _loadGenero() {
-    this.generoList$ = this.generoService.getGenero().valueChanges();
   }
   _loadTipoDocumento() {
     this.tipoDocumentoList$ = this.tipoDocumentoService.getTipoDocumentoList().valueChanges();
   }
-  _loadNivelEducativo() {
-    this.nivelEducativoList$ = this.nivelEducativoService.getNivelEducativoList().valueChanges();
-  }  
+  _loadGenero() {
+    this.generoList$ = this.generoService.getGeneroList().valueChanges();
+  }
+  _loadEstadoCivil() {
+    this.estadoCivilList$ = this.estadoCivilService.getEstadoCivilList().valueChanges();
+  }
   _loadNivelSocioeconomico() {
     this.nivelSocioeconomicoList$ = this.nivelSocioeconomicoService.getNivelSocioeconomicoList().valueChanges();
   }
-  _loadAntecedenteMedico() {
-    this.antecedenteMedicoList$ = this.antecedenteMedicoService.getAntecedenteMedicoList().valueChanges();
-  }
+  _loadNivelEducativo() {
+    this.nivelEducativoList$ = this.nivelEducativoService.getNivelEducativoList().valueChanges();
+  }  
 }

@@ -6,11 +6,8 @@ import {AntecedenteMedico} from '../../models/antecedente-medico';
   providedIn: 'root'
 })
 export class AntecedenteMedicoService {
-
   private antecedenteMedicoListRef = this.db.list<AntecedenteMedico>('antecendete-medico-list');
-
   constructor(private db: AngularFireDatabase) { }
-
   getAntecedenteMedicoList() {
     return this.antecedenteMedicoListRef;
   }
