@@ -48,7 +48,16 @@ export class HomePage implements OnInit {
     private nivelSocioeconomicoService: NivelSocioeconomicoService,
     private nivelEducativoService: NivelEducativoService
     ) {
-    this.construirValidaciones()
+      this.isUserRoot();
+      this.construirValidaciones()
+  }
+
+  isUserRoot() {
+    this.storage.get('root').then((isRoot: boolean) => {
+      if(!isRoot) {
+        this.navController.navigateRoot(['mensajeria']);
+      }
+    });
   }
 
   construirValidaciones(){

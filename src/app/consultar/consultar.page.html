@@ -9,74 +9,81 @@
 
 <ion-content>
   <ion-grid class="grid">
-      <ion-row>
-        <ion-col size="1">
-        </ion-col>
-        <ion-col size="4.5">
-          <ion-list>
-            <ion-item>
-              <ion-label position="floating">Rango de edad:</ion-label>
-              <ion-select okText="Seleccionar edad" cancelText="Cerrar">
-                <ion-select-option *ngFor="let rangoEdad of rangoEdadList$ | async"
-                [value]="rangoEdad.descripcion">{{rangoEdad.descripcion}}</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-        </ion-col>
-        <ion-col size="1">
-        </ion-col>
-        <ion-col size="4.5">
-          <ion-list>
-            <ion-item> 
-              <ion-label position="floating">Patología:</ion-label>
-              <ion-select okText="Seleccionar patología" cancelText="Cerrar">
-                <ion-select-option *ngFor="let patologia of patologiaList$ | async"
-                  [value]="patologia.descripcion">{{patologia.descripcion}}</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-        </ion-col>
-        <ion-col size="1">
-        </ion-col>
-      </ion-row>
-    </ion-grid>
     <ion-row>
-      <ion-col size="12" text-center>
-        <ion-button>Buscar</ion-button>
+      
+      <ion-col sizeLg="5" sizeMd="5" sizeSm="12" sizeXl="12" sizeXs="12" class="ion-padding-horizontal">
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Rango de edad:</ion-label>
+            <ion-select okText="Seleccionar edad" cancelText="Cerrar">
+              <ion-select-option *ngFor="let rangoEdad of rangoEdadList$ | async"
+              [value]="rangoEdad.descripcion">{{rangoEdad.descripcion}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
       </ion-col>
-    </ion-row>
+      
+      <ion-col sizeLg="5" sizeMd="5" sizeSm="12" sizeXl="12" sizeXs="12" class="ion-padding-horizontal">
+        <ion-list>
+          <ion-item> 
+            <ion-label position="floating">Patología:</ion-label>
+            <ion-select okText="Seleccionar patología" cancelText="Cerrar">
+              <ion-select-option *ngFor="let patologia of patologiaList$ | async"
+                [value]="patologia.descripcion">{{patologia.descripcion}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-col>
 
-    <ion-grid class="grid">
-      <ion-row>
-        <ion-col size="1">
+      <ion-col sizeLg="2" sizeMd="2" sizeSm="12" sizeXl="12" sizeXs="12">
+        <ion-button expand="full" class="filter-button">
+          <ion-icon name="funnel"></ion-icon>
+        </ion-button>
+      </ion-col>
+      
+    </ion-row>
+  </ion-grid>
+    
+  <ion-grid class="grid" class="ion-margin-top">
+    <ion-row class="ion-padding-horizontal">
+     
+      <ion-col size="2">
+        <b>Número Identificación</b>
+      </ion-col>
+      <ion-col size="3">
+        <b>Nombre y Apellido</b>
+      </ion-col>
+      <ion-col size="3">
+        <b>Dirección</b>
+      </ion-col>
+      <ion-col size="2">
+        <b>Teléfono</b>
+      </ion-col>
+      <ion-col size="2">
+        <b>Patología</b>
+      </ion-col>
+      
+    </ion-row>
+    <ion-row class="ion-padding-horizontal"
+      *ngFor="let paciente of pacientesList$ | async">
+
+      <ion-col size="2">
+        <ion-text>{{ paciente.numero_identidad }}</ion-text>
         </ion-col>
-        <ion-col size="2.5">
-          <div class="text">
-           Número Identificación
-          </div>
+        <ion-col size="3">
+          <ion-text>{{ paciente.nombre }} {{ paciente.apellido }}</ion-text>
         </ion-col>
-        <ion-col size="2.5">
-          <div class="text">
-          Nombre y Apellido
-          </div>
+        <ion-col size="3">
+          <ion-text>{{ paciente.direccion }}</ion-text>
         </ion-col>
-        <ion-col size="2.5">
-          <div class="text">
-          Dirección
-          </div>
+        <ion-col size="2">
+          <ion-text>{{ paciente.telefono_celular }}</ion-text>
         </ion-col>
-        <ion-col size="2.5" text-center>
-          <div class="text">
-          Teléfono
-          </div>
+        <ion-col size="2">
+          <ion-text> </ion-text>
         </ion-col>
-        <ion-col size="2.5">
-          <div class="text">
-          Patología
-          </div>
-        </ion-col>
-        <ion-col size="1">
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
