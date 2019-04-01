@@ -50,7 +50,7 @@ export class MensajeriaPage implements OnInit {
 
     var arrayGenero: any=[
       { descripcion: "Masculino" },
-      { descripcion: "Femenino" },
+      { descripcion: "Femenino" }, 
     ]
     //genero.addAllGenero(arrayGenero);
 
@@ -67,15 +67,15 @@ export class MensajeriaPage implements OnInit {
       { descripcion: "Medio" },
       { descripcion: "Bajo" },
     ]
-    nivelsocioeconomico.addNivelSocioeconomico(arrayNivelSocioeconomico);
+    //nivelsocioeconomico.addAllNivelSocioeconomico(arrayNivelSocioeconomico);
   
-    var arrayNivelEducativo: any=[
+    var arrayNivelEducativo = [
       { descripcion: "Primaria" },
       { descripcion: "Secundaria" },
       { descripcion: "Tecnico" },
       { descripcion: "Universitario" },
     ]
-    niveleducativo.addNivelEducativo(arrayNivelEducativo);
+    //niveleducativo.addAllNivelEducativo(arrayNivelEducativo);
   }
   
   ngOnInit() {}

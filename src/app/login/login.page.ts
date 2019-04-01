@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
   register() {
     this.angularFireAuth.auth.createUserWithEmailAndPassword(this.email, this.pass).then(res => {
       console.log(res);
-      this.navController.navigateRoot(['home']);
+      this.navController.navigateRoot(['basico']);
     });
   }
 

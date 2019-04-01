@@ -13,6 +13,7 @@ import { PacienteService } from '../service/db/paciente.service';
 export class DiagnosticoPage implements OnInit {
   public formDiagnostico: FormGroup;
   public formSubmit = false;
+  public interfaceOptions = { cssClass: 'custom-select' }
 
   constructor(
     private formBuilder: FormBuilder,//libreria a importar

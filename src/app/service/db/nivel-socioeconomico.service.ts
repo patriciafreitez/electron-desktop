@@ -8,26 +8,31 @@ import { NivelSocioeconomico } from 'src/app/models/nivel-socioeconomico';
 export class NivelSocioeconomicoService {
   private nivelSocioeconomicoListRef = this.db.list<NivelSocioeconomico>('nivel-socioeconomico-list');
 
- constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) { }
 
- getNivelSocioeconomicoList() {
-   return this.nivelSocioeconomicoListRef;
- }
- filterByDescripcion(descripcion: string) {
-   return this.db.list('/nivel-socioeconomico-list', ref => ref.orderByChild('descripcion').equalTo(descripcion));
- }
- addNivelSocioeconomico(nivelSocioeconomico: NivelSocioeconomico) {
-   return this.nivelSocioeconomicoListRef.push(nivelSocioeconomico);
- }
- addAllNivelSocioeconomico(nivelSocioeconomico: any) {
-  nivelSocioeconomico.forEach((element:any) => {
-    this. addNivelSocioeconomico(element)
+  getNivelSocioeconomicoList() {
+    return this.nivelSocioeconomicoListRef;
+  }
+
+  filterByDescripcion(descripcion: string) {
+    return this.db.list('/nivel-socioeconomico-list', ref => ref.orderByChild('descripcion').equalTo(descripcion));
+  }
+
+  addNivelSocioeconomico(nivelSocioeconomico: NivelSocioeconomico) {
+    return this.nivelSocioeconomicoListRef.push(nivelSocioeconomico);
+  }
+
+  addAllNivelSocioeconomico(nivelSocioeconomico: any) {
+    nivelSocioeconomico.forEach((element:any) => {
+      this. addNivelSocioeconomico(element)
     });
   }
- editNivelSocioeconomico(nivelSocioeconomico: NivelSocioeconomico) {
-   return this.nivelSocioeconomicoListRef.update(nivelSocioeconomico.key, nivelSocioeconomico);
- }
- removeNivelSocioeconomico(nivelSocioeconomico: NivelSocioeconomico) {
-   return this.nivelSocioeconomicoListRef.remove(nivelSocioeconomico.key);
- }
+
+  editNivelSocioeconomico(nivelSocioeconomico: NivelSocioeconomico) {
+    return this.nivelSocioeconomicoListRef.update(nivelSocioeconomico.key, nivelSocioeconomico);
+  }
+  
+  removeNivelSocioeconomico(nivelSocioeconomico: NivelSocioeconomico) {
+    return this.nivelSocioeconomicoListRef.remove(nivelSocioeconomico.key);
+  }
 }

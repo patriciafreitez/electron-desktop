@@ -110,7 +110,7 @@ export class MedicosPage implements OnInit {
 
   IrAtras() {
     this.guardarForm().then(()=>{
-      this.navController.navigateBack('home');
+      this.navController.navigateBack('basico');
     })
   }
 
@@ -119,23 +119,23 @@ export class MedicosPage implements OnInit {
       this.storage.get("form").then((form: any) =>{
         const value = this.formMedicos.value;
         form.formMedicos = {
-          hipertension_arterial:         value.hipertension_arterial === undefined ? false : value.hipertension_arterial, 
-          diabetes_mellitus:             value.diabetes_mellitus === undefined ? false : value.diabetes_mellitus,
-          diabetes_gestacional:          value.diabetes_gestacional === undefined ? false : value.diabetes_gestacional,
-          enfermedades_tiroidales:       value.enfermedades_tiroidales === undefined ? false : value.enfermedades_tiroidales,
-          enfermedades_cardiovasculares: value.enfermedades_cardiovasculares === undefined ? false : value.enfermedades_cardiovasculares,
-          drogadiccion:                 value.drogadiccion === undefined ? false : value.drogadiccion,
-          embarazo:                     value.embarazo === undefined ? false : value.embarazo,
-          desnutricion:                 value.desnutricion === undefined ? false : value.desnutricion,
-          sano:                         value.sano === undefined ? false : value.sano,
-          vih:                          value.vih === undefined ? false : value.vih,
+          hipertension_arterial:          value.hipertension_arterial === undefined ? false : value.hipertension_arterial, 
+          diabetes_mellitus:              value.diabetes_mellitus === undefined ? false : value.diabetes_mellitus,
+          diabetes_gestacional:           value.diabetes_gestacional === undefined ? false : value.diabetes_gestacional,
+          enfermedades_tiroidales:        value.enfermedades_tiroidales === undefined ? false : value.enfermedades_tiroidales,
+          enfermedades_cardiovasculares:  value.enfermedades_cardiovasculares === undefined ? false : value.enfermedades_cardiovasculares,
+          drogadiccion:                   value.drogadiccion === undefined ? false : value.drogadiccion,
+          embarazo:                       value.embarazo === undefined ? false : value.embarazo,
+          desnutricion:                   value.desnutricion === undefined ? false : value.desnutricion,
+          sano:                           value.sano === undefined ? false : value.sano,
+          vih:                            value.vih === undefined ? false : value.vih,
           enfermedades_gastrointestinales: value.enfermedades_gastrointestinales === undefined ? false : value.enfermedades_gastrointestinales,
-          alergias:                     value.alergias === undefined ? false : value.alergias,
-          sicologicos:                  value.sicologicos === undefined ? false : value.sicologicos,
-          obesidad:                     value.obesidad === undefined ? false : value.obesidad,
-          fumador:                      value.fumador === undefined ? false : value.fumador,
-          cigarros_dia:                 value.cigarros_dia === undefined ? false : value.cigarros_dia,
-          observaciones:                value.observaciones === undefined ? false : value.observaciones
+          alergias:                       value.alergias === undefined ? false : value.alergias,
+          sicologicos:                    value.sicologicos === undefined ? false : value.sicologicos,
+          obesidad:                       value.obesidad === undefined ? false : value.obesidad,
+          fumador:                        value.fumador === undefined ? false : value.fumador,
+          cigarros_dia:                   value.cigarros_dia === undefined ? false : value.cigarros_dia,
+          observaciones:                  value.observaciones === undefined ? false : value.observaciones
         }
         this.storage.set('form', form).then(data=>{
           resolve(data);

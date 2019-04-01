@@ -22,7 +22,10 @@
           <ion-list>
             <ion-item>
               <ion-label position="floating">* E.P.S:</ion-label>
-              <ion-select formControlName="eps" okText="Seleccionar" cancelText="Cerrar">
+              <ion-select formControlName="eps" 
+                okText="Seleccionar" 
+                cancelText="Cerrar"
+                [interfaceOptions]="interfaceOptions">
                 <ion-select-option *ngFor="let eps of epsList$ | async"
                 [value]="eps.descripcion">{{eps.descripcion}}</ion-select-option>
               </ion-select>
@@ -46,9 +49,12 @@
             </ion-item>
             <ion-item>
               <ion-label position="floating">* Tipo de Documento:</ion-label>
-              <ion-select formControlName="tipo_documento" okText="Seleccionar" cancelText="Cerrar">
-                <ion-select-option *ngFor="let tipo_documento of tipo_documento$ | async"
-                [value]="tipoDocumento.descripcion">{{tipo_documento.descripcion}}</ion-select-option>
+              <ion-select formControlName="tipo_documento" 
+                okText="Seleccionar" 
+                cancelText="Cerrar"
+                [interfaceOptions]="interfaceOptions">
+                <ion-select-option *ngFor="let tipo_documento of tipoDocumentoList$ | async"
+                [value]="tipo_documento.descripcion">{{tipo_documento.descripcion}}</ion-select-option>
               </ion-select>
               <div *ngIf="!formPersonales.controls.tipo_documento.valid && formSubmit">
                 <small style = "color:red"> Campo Obligatorio</small>
@@ -62,8 +68,14 @@
               </div>
             </ion-item>
             <ion-item>
-              <ion-label>* Fecha de Nacimiento:</ion-label>
-              <ion-datetime formControlName="fecha_nacimiento" display-format="DD MMM, YYYY"></ion-datetime>
+              <ion-label position="floating">* Fecha de Nacimiento:</ion-label>
+              <ion-datetime formControlName="fecha_nacimiento" 
+                pickerFormat="DD MMM, YYYY"
+                display-format="DD MMM, YYYY"
+                monthShortNames="Ene, Feb, Mar, Apr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
+                cancelText="Cerrar"
+                doneText="Seleccionar"  
+              ></ion-datetime>
               <div *ngIf="!formPersonales.controls.fecha_nacimiento.valid && formSubmit">
                 <small style = "color:red"> Campo Obligatorio</small>
               </div>
@@ -77,7 +89,10 @@
             </ion-item>
             <ion-item>
               <ion-label position="floating">* Genero:</ion-label>
-              <ion-select formControlName="genero" okText="Seleccionar" cancelText="Cerrar">
+              <ion-select formControlName="genero" 
+                okText="Seleccionar" 
+                cancelText="Cerrar"
+                [interfaceOptions]="interfaceOptions">
                 <ion-select-option *ngFor="let genero of generoList$ | async"
                 [value]="genero.descripcion">{{genero.descripcion}}</ion-select-option>
               </ion-select>
@@ -87,8 +102,11 @@
             </ion-item>
             <ion-item>
               <ion-label position="floating">* Estado Civil:</ion-label>
-              <ion-select formControlName="estado_civil" okText="Seleccionar" cancelText="Cerrar">
-                <ion-select-option *ngFor="let estado_civil of estado_civil$ | async"
+              <ion-select formControlName="estado_civil" 
+                okText="Seleccionar" 
+                cancelText="Cerrar"
+                [interfaceOptions]="interfaceOptions">
+                <ion-select-option *ngFor="let estado_civil of estadoCivilList$ | async"
                   [value]="estado_civil.descripcion">{{estado_civil.descripcion}}</ion-select-option>
               </ion-select>
               <div *ngIf="!formPersonales.controls.estado_civil.valid && formSubmit">
@@ -97,8 +115,11 @@
             </ion-item>
             <ion-item> 
               <ion-label position="floating">* Nivel Educativo:</ion-label>
-              <ion-select formControlName="nivel_educativo" okText="Seleccionar" cancelText="Cerrar">
-                  <ion-select-option *ngFor="let nivel_educativo of nivel_educativo$ | async"
+              <ion-select formControlName="nivel_educativo" 
+                okText="Seleccionar" 
+                cancelText="Cerrar"
+                [interfaceOptions]="interfaceOptions">
+                  <ion-select-option *ngFor="let nivel_educativo of nivelEducativoList$ | async"
                   [value]="nivel_educativo.descripcion">{{nivel_educativo.descripcion}}</ion-select-option>
               </ion-select>
               <div *ngIf="!formPersonales.controls.nivel_educativo.valid && formSubmit">
@@ -119,20 +140,27 @@
               </div>
             </ion-item>
             <ion-item>
-              <ion-label>* Fecha:</ion-label>
-              <ion-datetime formControlName="fecha" display-format="DD MMM, YYYY"></ion-datetime>
+              <ion-label position="floating">* Fecha:</ion-label>
+              <ion-datetime formControlName="fecha" 
+                pickerFormat="DD MMM, YYYY"
+                display-format="DD MMM, YYYY"
+                monthShortNames="Ene, Feb, Mar, Apr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
+                cancelText="Cerrar"
+                doneText="Seleccionar"  
+              ></ion-datetime>
               <div *ngIf="!formPersonales.controls.fecha.valid && formSubmit">
                 <small style = "color:red"> Campo Obligatorio</small>
               </div>
             </ion-item>
             <ion-item> 
               <ion-label position="floating">* Nivel Socioeconomico:</ion-label>
-
-              <ion-select formControlName="nivel_socioeconomico" okText="Seleccionar" cancelText="Cerrar">
-                  <ion-select-option *ngFor="let nivel_socioeconomico of nivel_socioeconomico$ | async"
+              <ion-select formControlName="nivel_socioeconomico" 
+                okText="Seleccionar" 
+                cancelText="Cerrar"
+                [interfaceOptions]="interfaceOptions">
+                  <ion-select-option *ngFor="let nivel_socioeconomico of nivelSocioeconomicoList$ | async"
                   [value]="nivel_socioeconomico.descripcion">{{nivel_socioeconomico.descripcion}}</ion-select-option>
               </ion-select>
-
               <div *ngIf="!formPersonales.controls.nivel_socioeconomico.valid && formSubmit">
                 <small style = "color:red"> Campo Obligatorio</small>
               </div>

@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController} from '@ionic/angular';
-import {AngularFireAuth} from '@angular/fire/auth';
 import {Observable} from 'rxjs';
 import {UserService} from '../service/db/user.service';
-import {ActivatedRoute} from '@angular/router';
 import { Storage } from '@ionic/storage';//importar manual
 
 import { Eps } from '../models/eps';
@@ -20,11 +18,6 @@ import { NivelEducativoService } from '../service/db/nivel-educativo.service';
 import { NivelEducativo } from '../models/nivel-educativo';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { RangoEdadService } from '../service/db/rango-edad.service';
-import { RangoEdad } from '../models/rango-edad';
-
-import { AntecedenteMedicoService } from '../service/db/antecedente-medico.service';
-import { AntecedenteMedico } from '../models/antecedente-medico';
 
 @Component({
   selector: 'app-home',
@@ -35,7 +28,7 @@ export class HomePage implements OnInit {
   private formularioData: any = {};
   public formPersonales: FormGroup;
   public formSubmit = false;
-  
+  public interfaceOptions = { cssClass: 'custom-select' }
   public epsList$: Observable<Eps[]>;
   public tipoDocumentoList$: Observable<TipoDocumento[]>;
   public generoList$: Observable<Genero[]>; 
@@ -48,31 +41,21 @@ export class HomePage implements OnInit {
     private navController: NavController,
     private storage: Storage,//importar manual
     private formBuilder: FormBuilder,
-
     private epsService: EpsService,
     private tipoDocumentoService: TipoDocumentoService,
     private generoService: GeneroService,    
     private estadoCivilService: EstadoCivilService,
     private nivelSocioeconomicoService: NivelSocioeconomicoService,
-    private nivelEducativoService: NivelEducativoService,
-
-    private rangoEdad: RangoEdadService,
-    private antecedenteMedicoService: AntecedenteMedicoService,
-
-  ) {
+    private nivelEducativoService: NivelEducativoService
+    ) {
     this.construirValidaciones()
     storage.get('email').then(email => {
       userService.findByEmail(email).snapshotChanges().subscribe(changes => {
         storage.set('root', changes.length > 0);
       });
     });
-
-    var array: any=[
-      { descripcion: "5 - 12", min: 5, max: 12 },
-      { descripcion: "12 - más", min: 12, max: 100}
-    ]
-    //rangoEdad.addAllRangoEdad(array); 
   }
+
   construirValidaciones(){
     this.formPersonales = this.formBuilder.group({ 
       eps:                  ['', Validators.compose([Validators.required])],//valida que el campo sea obligatorio
@@ -110,8 +93,8 @@ export class HomePage implements OnInit {
     this.formPersonales.get('estado_civil').setValue('soltero');
     this.formPersonales.get('nivel_educativo').setValue('Bachiller');
     this.formPersonales.get('historia_clinica').setValue('8578967586');
-    this.formPersonales.get('fecha_nacimiento').setValue('13/04/92');
-    this.formPersonales.get('fecha').setValue('22/03/19');
+    this.formPersonales.get('fecha_nacimiento').setValue('2012-01-01');
+    this.formPersonales.get('fecha').setValue('2019-01-01');
     this.formPersonales.get('nivel_socioeconomico').setValue('alto');
     this.formPersonales.get('ocupacion').setValue('ingeniero');
     this.formPersonales.get('telefono_celular').setValue('8576567567');
@@ -120,7 +103,6 @@ export class HomePage implements OnInit {
     this.formPersonales.get('direccion').setValue('españa');
     this.formPersonales.get('responsable').setValue('juana la cubana');
     this.formPersonales.get('telefono_responsable').setValue('766856798');
-
 
     if(this.formPersonales.valid) {
 
@@ -141,8 +123,8 @@ export class HomePage implements OnInit {
     this._loadEstadoCivil();
     this._loadNivelSocioeconomico();
     this._loadNivelEducativo();
-
   }
+
   guardarForm(){
     return new Promise((resolve, reject)=>{
       this.storage.get("form").then(form =>{
@@ -180,7 +162,6 @@ export class HomePage implements OnInit {
     })
    
   }
-
 
   _loadEps(){
     this.epsList$ = this.epsService.getEpsList().valueChanges();
