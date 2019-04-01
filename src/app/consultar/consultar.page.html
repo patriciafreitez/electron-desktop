@@ -11,31 +11,37 @@
   <ion-grid class="grid">
     <ion-row>
       
-      <ion-col sizeLg="5" sizeMd="5" sizeSm="12" sizeXl="12" sizeXs="12" class="ion-padding-horizontal">
+      <ion-col sizeLg="5" sizeMd="5" sizeSm="5" sizeXl="5" sizeXs="12" class="ion-padding-horizontal">
         <ion-list>
           <ion-item>
             <ion-label position="floating">Rango de edad:</ion-label>
-            <ion-select okText="Seleccionar edad" cancelText="Cerrar">
-              <ion-select-option *ngFor="let rangoEdad of rangoEdadList$ | async"
+            <ion-select (ionChange)="filterRangoEdad()"
+              [(ngModel)]="rangoEdad"
+              okText="Seleccionar" 
+              cancelText="Cerrar">
+              <ion-select-option *ngFor="let rangoEdad of rangoEdadList"
               [value]="rangoEdad.descripcion">{{rangoEdad.descripcion}}</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-list>
       </ion-col>
       
-      <ion-col sizeLg="5" sizeMd="5" sizeSm="12" sizeXl="12" sizeXs="12" class="ion-padding-horizontal">
+      <ion-col sizeLg="5" sizeMd="5" sizeSm="5" sizeXl="5" sizeXs="12" class="ion-padding-horizontal">
         <ion-list>
           <ion-item> 
             <ion-label position="floating">Patología:</ion-label>
-            <ion-select okText="Seleccionar patología" cancelText="Cerrar">
-              <ion-select-option *ngFor="let patologia of patologiaList$ | async"
+            <ion-select (ionChange)="filterPatologia()"
+              [(ngModel)]="patologia"
+              okText="Seleccionar" 
+              cancelText="Cerrar">
+              <ion-select-option *ngFor="let patologia of patologiaList"
                 [value]="patologia.descripcion">{{patologia.descripcion}}</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-list>
       </ion-col>
 
-      <ion-col sizeLg="2" sizeMd="2" sizeSm="12" sizeXl="12" sizeXs="12">
+      <ion-col sizeLg="2" sizeMd="2" sizeSm="2" sizeXl="2" sizeXs="12">
         <ion-button expand="full" class="filter-button">
           <ion-icon name="funnel"></ion-icon>
         </ion-button>
@@ -65,7 +71,7 @@
       
     </ion-row>
     <ion-row class="ion-padding-horizontal"
-      *ngFor="let paciente of pacientesList$ | async">
+      *ngFor="let paciente of pacientesFilter">
 
       <ion-col size="2">
         <ion-text>{{ paciente.numero_identidad }}</ion-text>
@@ -80,7 +86,7 @@
           <ion-text>{{ paciente.telefono_celular }}</ion-text>
         </ion-col>
         <ion-col size="2">
-          <ion-text> </ion-text>
+          <ion-text>{{ paciente.observaciones }}</ion-text>
         </ion-col>
 
     </ion-row>

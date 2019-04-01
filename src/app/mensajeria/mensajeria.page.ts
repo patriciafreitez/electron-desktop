@@ -69,9 +69,8 @@ export class MensajeriaPage implements OnInit {
     //niveleducativo.addAllNivelEducativo(arrayNivelEducativo);
 
     var arrayPatalogia = [
-      { descripcion: "Auencia dental" },
-      { descripcion: "Caries" },
-      { descripcion: "Patología atm" }
+    
+      { descripcion: "No posee" }
     ]
     //patologiaService.addAllPatologia(arrayPatalogia);
 
@@ -81,6 +80,7 @@ export class MensajeriaPage implements OnInit {
       { descripcion: "No posee" }
     ]
     //periodontitisService.addAllPeriodontitis(arrayPatalogia)
+
   }
   
   ngOnInit() {}

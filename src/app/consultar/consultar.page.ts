@@ -13,9 +13,12 @@ import { PacienteService } from '../service/db/paciente.service';
   styleUrls: ['./consultar.page.scss'],
 })
 export class ConsultarPage implements OnInit {
-  protected rangoEdadList$: Observable<RangoEdad[]>;
-  protected patologiaList$: Observable<Patologia[]>;
-  protected pacientesList$: Observable<Paciente[]>;
+  protected rangoEdadList: Array<RangoEdad> = [];
+  protected patologiaList: Array<Patologia> = [];
+  protected pacientesList: Array<Paciente> = [];
+  protected pacientesFilter: Array<Paciente> = [];
+  public rangoEdad = '';
+  public patologia = '';
 
   constructor(
     private rangoEdadService: RangoEdadService,
@@ -30,14 +33,37 @@ export class ConsultarPage implements OnInit {
   }
 
   _loadRangoEdad() {
-    this.rangoEdadList$ = this.rangoEdadService.getRangoEdad().valueChanges();
+    this.rangoEdadService.getRangoEdad().valueChanges().subscribe((data) => {
+      this.rangoEdadList = data
+    });
   }
 
   _loadPatologia() {
-    this.patologiaList$ = this.patologiaService.getPatologia().valueChanges();
+    this.patologiaService.getPatologia().valueChanges().subscribe((data) => {
+      this.patologiaList = data;
+    });
   }
 
   _loadPaciente() {
-    this.pacientesList$ = this.pacienteService.getPaciente().valueChanges();
+    this.pacienteService.getPaciente().valueChanges().subscribe((data) => {
+      this.pacientesList = data;
+      this.pacientesFilter = data;
+    });
+  }
+
+  async filterRangoEdad() {
+    if(this.rangoEdad === 'Todos') {
+      this.pacientesFilter = this.pacientesList;
+    } 
+    else {
+      const rango = this.rangoEdadList.find(rango => rango.descripcion === this.rangoEdad);
+      this.pacientesFilter.forEach((paciente, index) => {
+       
+      })
+    }
+  }
+
+  filterPatologia() {
+
   }
 }

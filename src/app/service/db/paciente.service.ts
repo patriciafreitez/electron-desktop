@@ -14,9 +14,9 @@ export class PacienteService {
     return this.pacienteListRef;
   }
 
-  //filterByDescripcion(descripcion: string) {
-  //  return this.db.list('/genero-list', ref => ref.orderByChild('descripcion').equalTo(descripcion));
-  //}
+  filterByDescripcion(descripcion: string) {
+    return this.db.list('/genero-list', ref => ref.orderByChild('descripcion').equalTo(descripcion));
+  }
 
   addPaciente(paciente: Paciente) {
     return this.pacienteListRef.push(paciente);
