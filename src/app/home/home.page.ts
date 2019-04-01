@@ -83,33 +83,10 @@ export class HomePage implements OnInit {
 
   validateFormPersonal() {
     console.log(this.formPersonales.value);
-    this.formPersonales.get('eps').setValue('subsidiado');
-    this.formPersonales.get('nombre').setValue('jose');
-    this.formPersonales.get('apellido').setValue('duin');
-    this.formPersonales.get('tipo_documento').setValue('cedula');
-    this.formPersonales.get('numero_identidad').setValue('777987766');
-    this.formPersonales.get('lugar_nacimiento').setValue('caracas');
-    this.formPersonales.get('genero').setValue('femenino');
-    this.formPersonales.get('estado_civil').setValue('soltero');
-    this.formPersonales.get('nivel_educativo').setValue('Bachiller');
-    this.formPersonales.get('historia_clinica').setValue('8578967586');
-    this.formPersonales.get('fecha_nacimiento').setValue('2012-01-01');
-    this.formPersonales.get('fecha').setValue('2019-01-01');
-    this.formPersonales.get('nivel_socioeconomico').setValue('alto');
-    this.formPersonales.get('ocupacion').setValue('ingeniero');
-    this.formPersonales.get('telefono_celular').setValue('8576567567');
-    this.formPersonales.get('telefono_fijo').setValue('857659877');
-    this.formPersonales.get('correo').setValue('hola@');
-    this.formPersonales.get('direccion').setValue('españa');
-    this.formPersonales.get('responsable').setValue('juana la cubana');
-    this.formPersonales.get('telefono_responsable').setValue('766856798');
-
     if(this.formPersonales.valid) {
-
-      this.guardarForm().then(()=>{
+      this.guardarForm().then(() => {
         this.navController.navigateForward('medicos');
       });// aqui guarda los datos asignados 
-
     }
     else{
       this.formSubmit = true; // controla que el mensaje salga cuando intenta cambiar de pantalla
@@ -127,9 +104,9 @@ export class HomePage implements OnInit {
 
   guardarForm(){
     return new Promise((resolve, reject)=>{
-      this.storage.get("form").then(form =>{
+      this.storage.get('form').then(form =>{
         var form2: any = form;
-        if (form == undefined ){
+        if (form == undefined ) {
           form2 = {}
         }
         const value = this.formPersonales.value;

@@ -9,6 +9,8 @@ import { GeneroService } from '../service/db/genero.service';
 import { TipoDocumentoService } from '../service/db/tipo-documento.service';
 import { NivelEducativoService } from '../service/db/nivel-educativo.service';
 import { NivelSocioeconomicoService } from '../service/db/nivel-socioeconomico.service';
+import { PatologiaService } from '../service/db/patologia.service';
+import { PeriodontitisService } from '../service/db/periodontitis.service';
 
 @Component({
   selector: 'app-mensajeria',
@@ -22,12 +24,8 @@ export class MensajeriaPage implements OnInit {
     private navController: NavController,
     private angularFireAuth: AngularFireAuth,
     private storage: Storage,
-    private eps: EpsService,
-    private estadocivil: EstadoCivilService,
-    private genero: GeneroService,
-    private tipodocumento: TipoDocumentoService,
-    private nivelsocioeconomico: NivelSocioeconomicoService,
-    private niveleducativo: NivelEducativoService,
+    private patologiaService: PatologiaService,
+    private periodontitisService: PeriodontitisService
 
   ) 
   { 
@@ -76,6 +74,20 @@ export class MensajeriaPage implements OnInit {
       { descripcion: "Universitario" },
     ]
     //niveleducativo.addAllNivelEducativo(arrayNivelEducativo);
+
+    var arrayPatalogia = [
+      { descripcion: "Auencia dental" },
+      { descripcion: "Caries" },
+      { descripcion: "Patología atm" }
+    ]
+    //patologiaService.addAllPatologia(arrayPatalogia);
+
+    var arrayPatalogia = [
+      { descripcion: "Localizada" },
+      { descripcion: "General" },
+      { descripcion: "No posee" }
+    ]
+    //periodontitisService.addAllPeriodontitis(arrayPatalogia)
   }
   
   ngOnInit() {}

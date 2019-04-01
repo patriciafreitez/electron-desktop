@@ -11,9 +11,8 @@
   <form [formGroup]="formDiagnostico"> <!--permite añadir las validaciones-->
     <ion-grid class="grid">
     <ion-row>
-      <ion-col size="1">
-      </ion-col>
-      <ion-col size="4.5">
+      
+      <ion-col sizeLg="6" sizeMd="6" sizeSm="6" sizeXl="6" sizeXs="12" class="ion-padding-horizontal">
         <ion-list>
           <ion-list-header class="titulos">
             <ion-label >C.O.P</ion-label>
@@ -54,6 +53,8 @@
                 okText="Seleccionar" 
                 cancelText="Cerrar"
                 [interfaceOptions]="interfaceOptions">
+                <ion-select-option *ngFor="let periodontitis of periodontitisist$ | async"
+                  [value]="periodontitis.descripcion">{{periodontitis.descripcion}}</ion-select-option>
               </ion-select>
             </ion-item>
             <ion-item>
@@ -69,9 +70,8 @@
             </ion-item>
         </ion-list>
       </ion-col>
-      <ion-col size="1">
-      </ion-col>
-      <ion-col size="4.5">
+      
+      <ion-col sizeLg="6" sizeMd="6" sizeSm="6" sizeXl="6" sizeXs="12" class="ion-padding-horizontal">
         <ion-list>
           <ion-list-header class="titulos">
               <ion-label>HABITOS</ion-label>

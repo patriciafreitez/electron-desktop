@@ -3,7 +3,9 @@ import { Storage } from '@ionic/storage';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { PacienteService } from '../service/db/paciente.service';
-
+import { PeriodontitisService } from '../service/db/periodontitis.service';
+import { Periodontitis } from '../models/periodontitis';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-diagnostico',
@@ -14,16 +16,19 @@ export class DiagnosticoPage implements OnInit {
   public formDiagnostico: FormGroup;
   public formSubmit = false;
   public interfaceOptions = { cssClass: 'custom-select' }
+  public periodontitisist$: Observable<Periodontitis[]>;
 
   constructor(
     private formBuilder: FormBuilder,//libreria a importar
     private navController: NavController,
     private storage: Storage,
-    private pacienteService: PacienteService
+    private pacienteService: PacienteService,
+    private periodontitisService: PeriodontitisService
   ) { 
     this.loadParams();
     this.construirValidaciones();
   }
+
   loadParams() {//se guardan los datos de la pantalla pasada para sobre escribir enn formulario data
     this.storage.get('form').then(form => {
       if(form.formDiagnostico !== undefined) {
@@ -42,6 +47,7 @@ export class DiagnosticoPage implements OnInit {
       }
     });
   }
+
   construirValidaciones() {
     this.formDiagnostico = this.formBuilder.group({ 
       cariados:             ['', Validators.compose([Validators.required])],
@@ -57,8 +63,9 @@ export class DiagnosticoPage implements OnInit {
       interposicion_lingual:[false]
     });
   }
+
   IrAtras() {
-    this.guardarForm().then(()=>{
+    this.guardarForm().then(() => {
       this.navController.navigateBack('medicos');
     })
   }
@@ -80,7 +87,7 @@ export class DiagnosticoPage implements OnInit {
           succion_digital:      value.succion_digital === undefined ? false : value.succion_digital,
           interposicion_lingual:value.interposicion_lingual === undefined ? false : value.interposicion_lingual
         }
-        this.storage.set('form', form).then(data=>{
+        this.storage.set('form', form).then(data => {
           resolve(data);
         });// aqui guarda los datos asignados   
       })
@@ -90,25 +97,29 @@ export class DiagnosticoPage implements OnInit {
   
   registrar(){
     if(this.formDiagnostico.valid) {
-
-    this.guardarForm().then((data)=>{
-      console.log(data);
-      var user: any = {};
-      for(let key in data){
-        for(let key2 in data[key]){
-          user[key2] = data[key][key2]
+      this.guardarForm().then((data) => {
+        console.log(data);
+        var user: any = {};
+        for(let key in data){
+          for(let key2 in data[key]){
+            user[key2] = data[key][key2]
+          }
         }
-      }
-    console.log(user);
-    this.pacienteService.addAllPaciente([user]);
-
-     // this.navController.navigateBack('medicos');
-    })
+      console.log(user);
+      this.pacienteService.addPaciente(user);
+      this.storage.remove('form');
+      this.navController.navigateBack('mensajeria');
+      })
     } else {
       this.formSubmit = true; // controla que el mensaje salga cuando intenta cambiar de pantalla
     }
   }
+
   ngOnInit() {
+    this._loadPeriodontitis();
   }
 
+  _loadPeriodontitis(){
+    this.periodontitisist$ = this.periodontitisService.getPeriodontitis().valueChanges();
+  }
 }
