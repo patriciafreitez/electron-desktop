@@ -49,11 +49,6 @@ export class HomePage implements OnInit {
     private nivelEducativoService: NivelEducativoService
     ) {
     this.construirValidaciones()
-    storage.get('email').then(email => {
-      userService.findByEmail(email).snapshotChanges().subscribe(changes => {
-        storage.set('root', changes.length > 0);
-      });
-    });
   }
 
   construirValidaciones(){

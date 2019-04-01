@@ -20,23 +20,7 @@ import { AntecedenteMedico } from '../models/antecedente-medico';
 export class MedicosPage implements OnInit {
   public formMedicos: FormGroup;
   public formSubmit = false;
-
   public AntecendetesMedicosList$: Observable<AntecedenteMedico[]>;
-
-  hipertensionArterial = false;
-  diabetesMellitus = false;
-  DiabetesGestacional = false;
-  EnfermedadesTiroidales = false;
-  EnfermedadesCardiovasculares = false;
-  Drogadiccion = false;
-  Embarazo = false;
-  EnfermedadesGastrointestinales = false;
-  Alergias = false;
-  Sicologicos = false;
-  Obesidad = false;
-  Desnutricion = false;
-  Sano = false;
-  Fumador = false;
 
   constructor(
     private route: ActivatedRoute,

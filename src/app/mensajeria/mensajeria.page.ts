@@ -3,14 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Storage } from '@ionic/storage';
-import { EpsService } from '../service/db/eps.service';
-import { EstadoCivilService } from '../service/db/estado-civil.service';
-import { GeneroService } from '../service/db/genero.service';
-import { TipoDocumentoService } from '../service/db/tipo-documento.service';
-import { NivelEducativoService } from '../service/db/nivel-educativo.service';
-import { NivelSocioeconomicoService } from '../service/db/nivel-socioeconomico.service';
-import { PatologiaService } from '../service/db/patologia.service';
-import { PeriodontitisService } from '../service/db/periodontitis.service';
+import { UserService } from '../service/db/user.service';
 
 @Component({
   selector: 'app-mensajeria',
@@ -18,17 +11,17 @@ import { PeriodontitisService } from '../service/db/periodontitis.service';
   styleUrls: ['./mensajeria.page.scss'],
 })
 export class MensajeriaPage implements OnInit {
+  public isRoot = false;
 
   constructor(
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     private navController: NavController,
     private angularFireAuth: AngularFireAuth,
     private storage: Storage,
-    private patologiaService: PatologiaService,
-    private periodontitisService: PeriodontitisService
-
-  ) 
-  { 
+    private userService: UserService
+  ) {
+    this.isUserRoot();
+    
     var arrayEps: any=[
       { descripcion: "Subsidiado" },
       { descripcion: "Contributivo" },
@@ -91,6 +84,15 @@ export class MensajeriaPage implements OnInit {
   }
   
   ngOnInit() {}
+
+  isUserRoot() {
+    this.storage.get('email').then(email => {
+      this.userService.findByEmail(email).snapshotChanges().subscribe(changes => {
+        this.isRoot = changes.length > 0;
+        this.storage.set('root', this.isRoot);
+      });
+    });
+  }
   
   cerrarSesion() {
     this.angularFireAuth.auth.signOut().then(() => {
