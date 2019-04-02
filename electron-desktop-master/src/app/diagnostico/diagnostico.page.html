@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button (click)="IrAtras()" fill="clear" slot="start">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+    <ion-title>Formulario Diagnostico Oral</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="formDiagnostico"> <!--permite añadir las validaciones-->
+    <ion-grid class="grid">
+    <ion-row>
+      
+      <ion-col sizeLg="6" sizeMd="6" sizeSm="6" sizeXl="6" sizeXs="12" class="ion-padding-horizontal">
+        <ion-list>
+          <ion-list-header class="titulos">
+            <ion-label >C.O.P</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-label position="floating">* Cariados:</ion-label>
+            <ion-input formControlName="cariados"></ion-input>
+            <div *ngIf="!formDiagnostico.controls.cariados.valid && formSubmit">
+              <small style = "color:red"> Campo Obligatorio</small>
+            </div>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">* Opturados:</ion-label>
+            <ion-input formControlName="opturados"></ion-input>
+            <div *ngIf="!formDiagnostico.controls.opturados.valid && formSubmit">
+              <small style = "color:red"> Campo Obligatorio</small>
+            </div>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">* Perdidos:</ion-label>
+            <ion-input formControlName="perdidos"></ion-input>
+            <div *ngIf="!formDiagnostico.controls.perdidos.valid && formSubmit">
+              <small style = "color:red"> Campo Obligatorio</small>
+            </div>
+          </ion-item>
+        </ion-list>
+        <ion-list>
+          <ion-list-header class="titulos">
+            <ion-label>ENFERMEDAD PERIODONTAL</ion-label>
+          </ion-list-header>
+            <ion-item>
+                <ion-checkbox formControlName="gingivitis" ></ion-checkbox>
+                <ion-label>&emsp;Gingivitis</ion-label>
+            </ion-item>
+            <ion-item> 
+              <ion-label position="floating">Periodonditis:</ion-label>
+              <ion-select formControlName="periodontitis" 
+                okText="Seleccionar" 
+                cancelText="Cerrar"
+                [interfaceOptions]="interfaceOptions">
+                <ion-select-option *ngFor="let periodontitis of periodontitisist$ | async"
+                  [value]="periodontitis.descripcion">{{periodontitis.descripcion}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-checkbox formControlName="patologia" ></ion-checkbox>
+                <ion-label>&emsp;Ausencia dental</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="patologia" ></ion-checkbox>
+              <ion-label>&emsp;Caries</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="patologia" ></ion-checkbox>
+              <ion-label>&emsp;Patologia ATM</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">* Mal posiciones:</ion-label>
+              <ion-input formControlName="mal_posiciones"></ion-input>
+              <div *ngIf="!formDiagnostico.controls.mal_posiciones.valid && formSubmit">
+                <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+        </ion-list>
+      </ion-col>
+      
+      <ion-col sizeLg="6" sizeMd="6" sizeSm="6" sizeXl="6" sizeXs="12" class="ion-padding-horizontal">
+        <ion-list>
+          <ion-list-header class="titulos">
+              <ion-label>HABITOS</ion-label>
+          </ion-list-header>
+            <ion-item>
+              <ion-checkbox formControlName="onicofagia" ></ion-checkbox>
+              <ion-label>&emsp;Onicofagia</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox  formControlName="succion_labial" ></ion-checkbox>
+              <ion-label>&emsp;Succión labial</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="succion_digital" ></ion-checkbox>
+              <ion-label>&emsp;Succión digital</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="interposicion_lingual" ></ion-checkbox>
+              <ion-label>&emsp;Interposición lingual</ion-label>
+            </ion-item>
+            <div>
+
+            </div>
+            
+              <ion-button (click)="registrar()" expand="block" class="registrar" >Registrar</ion-button>
+            
+            
+
+        </ion-list>
+
+      </ion-col>
+
+    </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-content>

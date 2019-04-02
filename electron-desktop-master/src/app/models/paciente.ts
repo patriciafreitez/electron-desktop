@@ -1,0 +1,53 @@
+export class Paciente {
+    key?: string;
+    eps: string;
+    nombre: string;
+    apellido: string;
+    tipo_documento: string;
+    numero_identidad: string;
+    fecha_nacimiento: string;
+    lugar_nacimiento: string;
+    genero: string;
+    estado_civil: string;
+    nivel_educativo: string;
+    historia_clinica: string;
+    fecha: string;
+    nivel_socioeconomico: string;
+    ocupacion: string;
+    telefono_celular: string;
+    telefono_fijo: string;
+    correo?: string;
+    direccion: string;
+    responsable?: string;
+    telefono_responsable: string;
+
+    hipertension_arterial?: boolean;
+    diabetes_mellitus?: boolean;
+    diabetes_gestacional?: boolean;
+    enfermedades_tiroidales?: boolean;
+    enfermedades_cardiovasculares?: boolean;
+    drogadiccion?: boolean;
+    embarazo?: boolean;
+    vih?: boolean;
+    enfermedades_gastrointestinales?: boolean;
+    alergias?: boolean;
+    sicologicos?: boolean;
+    obesidad?: boolean;
+    fumador?: boolean;
+    sano?: boolean;
+    desnutricion?: boolean;
+    cigarros_dia?: string;
+    observaciones?: string;
+
+    cariados: string;
+    opturados: string;
+    perdidos: string;
+    gingivitis?: boolean;
+    periodontitis?: boolean;
+    patologia?: boolean;
+    mal_posiciones: string;
+    onicofagia?: boolean;
+    succion_labial?: boolean;
+    succion_digital?: boolean;
+    interposicion_lingual?: boolean;
+}

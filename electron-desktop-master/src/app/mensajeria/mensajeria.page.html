@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title >Banco de Pacientes</ion-title>
+    <ion-button slot="end" routerLink="/basico" *ngIf="isRoot">Registrar Pacientes</ion-button>
+    <ion-button slot="end" routerLink="/consultar">Consultar Pacientes</ion-button>
+    <ion-button slot="end" (click)="cerrarSesion()">Cerrar Sesion</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-grid class="grid">
+      <ion-item>
+      </ion-item>
+      <ion-item>
+        <ion-title>
+            <h2><p>Publicaciones</p></h2>
+        </ion-title>
+      </ion-item>
+  </ion-grid>
+
+  <ion-list>
+    <ion-item>
+      <ion-item>
+        <ion-label position="floating">escriba aqui</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+    </ion-item>
+
+    <ion-item-sliding>
+      <ion-item-options side="end">
+        <ion-item-option (click)="unread(item)">Enviar</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <ion-button type="submit" *ngIf="isRoot">Enviar</ion-button>      
+  </ion-list>
+</ion-content>

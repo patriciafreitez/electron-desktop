@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button (click)="IrAtras()" fill="clear" slot="start">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+    <ion-title>Formulario Antecedentes Medicos</ion-title>
+    <ion-button (click)="validateFormMedicos()" fill="clear" slot="end">
+      <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="formMedicos"> <!--permite añadir las vaildaciones-->
+    <ion-grid class="grid">
+      <ion-row>
+       
+        <ion-col sizeLg="6" sizeMd="6" sizeSm="6" sizeXl="6" sizeXs="12" class="ion-padding-horizontal">
+          <ion-list>
+            <ion-item>
+              <ion-checkbox formControlName="hipertension_arterial"></ion-checkbox>
+              <ion-label>&emsp;Hipertension arterial</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="diabetes_mellitus" ></ion-checkbox>
+              <ion-label>&emsp;Diabetes mellitus</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="diabetes_gestacional" ></ion-checkbox>
+              <ion-label>&emsp;Diabetes gestacional</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="enfermedades_tiroidales" ></ion-checkbox>
+              <ion-label>&emsp;Enfermedades tiroidales</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="enfermedades_cardiovasculares" ></ion-checkbox>
+              <ion-label>&emsp;Enfermedades cardiovasculares</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="drogadiccion" ></ion-checkbox>
+              <ion-label>&emsp;Drogadicción</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="embarazo" ></ion-checkbox>
+              <ion-label>&emsp;Embarazo</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="vih"></ion-checkbox>
+              <ion-label>&emsp;VIH</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="enfermedades_gastrointestinales" ></ion-checkbox>
+              <ion-label>&emsp;Enfermedades gastrointestinales</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+       
+        <ion-col sizeLg="6" sizeMd="6" sizeSm="6" sizeXl="6" sizeXs="12" class="ion-padding-horizontal">
+          <ion-list>
+            <ion-item>
+              <ion-checkbox formControlName="alergias" ></ion-checkbox>
+              <ion-label>&emsp;Alergias</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="sicologicos" ></ion-checkbox>
+              <ion-label>&emsp;Sicologicos</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="obesidad" ></ion-checkbox>
+              <ion-label>&emsp;Obesidad</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="desnutricion" ></ion-checkbox>
+              <ion-label>&emsp;Desnutrición</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="sano"></ion-checkbox>
+              <ion-label>&emsp;Sano</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="fumador" ></ion-checkbox>
+              <ion-label>&emsp;Fumador</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Cigarros al dia:</ion-label>
+              <ion-input formControlName="cigarros_dia" type="number" min="0"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Observaciones:</ion-label>
+              <ion-textarea formControlName="observaciones" rows="3"></ion-textarea>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+       
+      </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-content>

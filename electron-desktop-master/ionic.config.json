@@ -1,0 +1,7 @@
+{
+  "name": "desktop",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
