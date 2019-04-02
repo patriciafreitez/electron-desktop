@@ -18,6 +18,7 @@ import { NivelEducativoService } from '../service/db/nivel-educativo.service';
 import { NivelEducativo } from '../models/nivel-educativo';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Paciente } from '../models/paciente';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +36,7 @@ export class HomePage implements OnInit {
   public estadoCivilList$: Observable<EstadoCivil[]>;
   public nivelSocioeconomicoList$: Observable<NivelSocioeconomico[]>;
   public nivelEducativoList$: Observable<NivelEducativo[]>;
+  public soloVista: false;
 
   constructor(
     public userService: UserService,
@@ -50,6 +52,36 @@ export class HomePage implements OnInit {
     ) {
       this.isUserRoot();
       this.construirValidaciones()
+      this.verPaciente();
+  }
+
+  verPaciente() {
+    this.storage.get('disabled').then((data) => {
+      this.soloVista = data.disabled;
+      if(data.paciente !== null) {
+        const paciente: Paciente = data.paciente;
+        this.formPersonales.get('eps').setValue(paciente.eps);
+        this.formPersonales.get('nombre').setValue(paciente.nombre);
+        this.formPersonales.get('apellido').setValue(paciente.apellido);
+        this.formPersonales.get('tipo_documento').setValue(paciente.tipo_documento);
+        this.formPersonales.get('numero_identidad').setValue(paciente.numero_identidad);
+        this.formPersonales.get('lugar_nacimiento').setValue(paciente.lugar_nacimiento);
+        this.formPersonales.get('genero').setValue(paciente.genero);
+        this.formPersonales.get('estado_civil').setValue(paciente.estado_civil);
+        this.formPersonales.get('nivel_educativo').setValue(paciente.nivel_educativo);
+        this.formPersonales.get('historia_clinica').setValue(paciente.historia_clinica);
+        this.formPersonales.get('fecha_nacimiento').setValue(paciente.fecha_nacimiento);
+        this.formPersonales.get('fecha').setValue(paciente.fecha);
+        this.formPersonales.get('nivel_socioeconomico').setValue(paciente.nivel_socioeconomico);
+        this.formPersonales.get('ocupacion').setValue(paciente.ocupacion);
+        this.formPersonales.get('telefono_celular').setValue(paciente.telefono_celular);
+        this.formPersonales.get('telefono_fijo').setValue(paciente.telefono_fijo);
+        this.formPersonales.get('correo').setValue(paciente.correo);
+        this.formPersonales.get('direccion').setValue(paciente.direccion);
+        this.formPersonales.get('responsable').setValue(paciente.responsable);
+        this.formPersonales.get('telefono_responsable').setValue(paciente.telefono_responsable);
+      }
+    })
   }
 
   isUserRoot() {

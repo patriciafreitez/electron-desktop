@@ -85,6 +85,13 @@ export class MensajeriaPage implements OnInit {
   
   ngOnInit() {}
 
+  abrirFormulario() {
+    const params = { disabled: false, paciente: null };
+    this.storage.set('disabled', params).then(() => {
+      this.navController.navigateForward('basico');
+    })
+  }
+
   isUserRoot() {
     this.storage.get('email').then(email => {
       this.userService.findByEmail(email).snapshotChanges().subscribe(changes => {

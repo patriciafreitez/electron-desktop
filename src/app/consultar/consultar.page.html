@@ -71,7 +71,8 @@
       
     </ion-row>
     <ion-row class="ion-padding-horizontal"
-      *ngFor="let paciente of pacientesFilter">
+      *ngFor="let paciente of pacientesFilter"
+      (click)="verPaciente(paciente)">
 
       <ion-col size="2">
         <ion-text>{{ paciente.numero_identidad }}</ion-text>

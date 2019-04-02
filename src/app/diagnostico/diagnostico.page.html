@@ -19,21 +19,21 @@
           </ion-list-header>
           <ion-item>
             <ion-label position="floating">* Cariados:</ion-label>
-            <ion-input formControlName="cariados"></ion-input>
+            <ion-input formControlName="cariados" [disabled]="soloVista"></ion-input>
             <div *ngIf="!formDiagnostico.controls.cariados.valid && formSubmit">
               <small style = "color:red"> Campo Obligatorio</small>
             </div>
           </ion-item>
           <ion-item>
             <ion-label position="floating">* Opturados:</ion-label>
-            <ion-input formControlName="opturados"></ion-input>
+            <ion-input formControlName="opturados" [disabled]="soloVista"></ion-input>
             <div *ngIf="!formDiagnostico.controls.opturados.valid && formSubmit">
               <small style = "color:red"> Campo Obligatorio</small>
             </div>
           </ion-item>
           <ion-item>
             <ion-label position="floating">* Perdidos:</ion-label>
-            <ion-input formControlName="perdidos"></ion-input>
+            <ion-input formControlName="perdidos" [disabled]="soloVista"></ion-input>
             <div *ngIf="!formDiagnostico.controls.perdidos.valid && formSubmit">
               <small style = "color:red"> Campo Obligatorio</small>
             </div>
@@ -50,6 +50,7 @@
             <ion-item> 
               <ion-label position="floating">Periodonditis:</ion-label>
               <ion-select formControlName="periodontitis" 
+                [disabled]="soloVista"
                 okText="Seleccionar" 
                 cancelText="Cerrar"
                 [interfaceOptions]="interfaceOptions">
@@ -58,12 +59,12 @@
               </ion-select>
             </ion-item>
             <ion-item>
-              <ion-checkbox formControlName="patologia" ></ion-checkbox>
+              <ion-checkbox formControlName="patologia" [disabled]="soloVista"></ion-checkbox>
               <ion-label>&emsp;Patologia AMT</ion-label>
             </ion-item>
             <ion-item>
               <ion-label position="floating">* Mal posiciones:</ion-label>
-              <ion-input formControlName="mal_posiciones"></ion-input>
+              <ion-input formControlName="mal_posiciones" [disabled]="soloVista"></ion-input>
               <div *ngIf="!formDiagnostico.controls.mal_posiciones.valid && formSubmit">
                 <small style = "color:red"> Campo Obligatorio</small>
               </div>
@@ -77,29 +78,25 @@
               <ion-label>HABITOS</ion-label>
           </ion-list-header>
             <ion-item>
-              <ion-checkbox formControlName="onicofagia" ></ion-checkbox>
+              <ion-checkbox formControlName="onicofagia" [disabled]="soloVista"></ion-checkbox>
               <ion-label>&emsp;Onicofagia</ion-label>
             </ion-item>
             <ion-item>
-              <ion-checkbox  formControlName="succion_labial" ></ion-checkbox>
+              <ion-checkbox  formControlName="succion_labial" [disabled]="soloVista"></ion-checkbox>
               <ion-label>&emsp;Succión labial</ion-label>
             </ion-item>
             <ion-item>
-              <ion-checkbox formControlName="succion_digital" ></ion-checkbox>
+              <ion-checkbox formControlName="succion_digital" [disabled]="soloVista"></ion-checkbox>
               <ion-label>&emsp;Succión digital</ion-label>
             </ion-item>
             <ion-item>
-              <ion-checkbox formControlName="interposicion_lingual" ></ion-checkbox>
+              <ion-checkbox formControlName="interposicion_lingual" [disabled]="soloVista"></ion-checkbox>
               <ion-label>&emsp;Interposición lingual</ion-label>
             </ion-item>
             <div>
 
             </div>
-            
-              <ion-button (click)="registrar()" expand="block" class="registrar" >Registrar</ion-button>
-            
-            
-
+              <ion-button *ngIf="!soloVista" (click)="registrar()" expand="block" class="registrar" >Registrar</ion-button>
         </ion-list>
 
       </ion-col>

@@ -11,6 +11,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { AntecedenteMedicoService } from '../service/db/antecedente-medico.service';
 import { AntecedenteMedico } from '../models/antecedente-medico';
+import { Paciente } from '../models/paciente';
 
 @Component({
   selector: 'app-medicos',
@@ -21,6 +22,7 @@ export class MedicosPage implements OnInit {
   public formMedicos: FormGroup;
   public formSubmit = false;
   public AntecendetesMedicosList$: Observable<AntecedenteMedico[]>;
+  public soloVista: false;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +36,33 @@ export class MedicosPage implements OnInit {
   ) { 
     this.loadParams();
     this.construirValidaciones();
+    this.verPaciente();
+  }
+
+  verPaciente() {
+    this.storage.get('disabled').then((data) => {
+      this.soloVista = data.disabled;
+      if(data.paciente !== null) {
+        const paciente: Paciente = data.paciente;
+        this.formMedicos.get('hipertension_arterial').setValue(paciente.hipertension_arterial);
+        this.formMedicos.get('diabetes_mellitus').setValue(paciente.diabetes_mellitus);
+        this.formMedicos.get('diabetes_gestacional').setValue(paciente.diabetes_gestacional);
+        this.formMedicos.get('enfermedades_tiroidales').setValue(paciente.enfermedades_tiroidales);
+        this.formMedicos.get('enfermedades_cardiovasculares').setValue(paciente.enfermedades_cardiovasculares);
+        this.formMedicos.get('drogadiccion').setValue(paciente.drogadiccion);
+        this.formMedicos.get('embarazo').setValue(paciente.embarazo);
+        this.formMedicos.get('desnutricion').setValue(paciente.desnutricion);
+        this.formMedicos.get('sano').setValue(paciente.sano);
+        this.formMedicos.get('vih').setValue(paciente.vih);
+        this.formMedicos.get('enfermedades_gastrointestinales').setValue(paciente.enfermedades_gastrointestinales);
+        this.formMedicos.get('alergias').setValue(paciente.alergias);
+        this.formMedicos.get('sicologicos').setValue(paciente.sicologicos);
+        this.formMedicos.get('obesidad').setValue(paciente.obesidad);
+        this.formMedicos.get('fumador').setValue(paciente.fumador);
+        this.formMedicos.get('cigarros_dia').setValue(paciente.cigarros_dia);
+        this.formMedicos.get('observaciones').setValue(paciente.observaciones);
+      }
+    })
   }
 
   loadParams() {//se guardan los datos de la pantalla pasada para sobre escribir enn formulario data

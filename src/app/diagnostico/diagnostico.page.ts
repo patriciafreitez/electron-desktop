@@ -6,6 +6,7 @@ import { PacienteService } from '../service/db/paciente.service';
 import { PeriodontitisService } from '../service/db/periodontitis.service';
 import { Periodontitis } from '../models/periodontitis';
 import {Observable} from 'rxjs';
+import { Paciente } from '../models/paciente';
 
 @Component({
   selector: 'app-diagnostico',
@@ -17,6 +18,7 @@ export class DiagnosticoPage implements OnInit {
   public formSubmit = false;
   public interfaceOptions = { cssClass: 'custom-select' }
   public periodontitisist$: Observable<Periodontitis[]>;
+  public soloVista: false;
 
   constructor(
     private formBuilder: FormBuilder,//libreria a importar
@@ -27,6 +29,27 @@ export class DiagnosticoPage implements OnInit {
   ) { 
     this.loadParams();
     this.construirValidaciones();
+    this.verPaciente();
+  }
+
+  verPaciente() {
+    this.storage.get('disabled').then((data) => {
+      this.soloVista = data.disabled;
+      if(data.paciente !== null) {
+        const paciente: Paciente = data.paciente;
+        this.formDiagnostico.get('cariados').setValue(paciente.cariados);
+        this.formDiagnostico.get('opturados').setValue(paciente.opturados);
+        this.formDiagnostico.get('perdidos').setValue(paciente.perdidos);
+        this.formDiagnostico.get('periodontitis').setValue(paciente.periodontitis);
+        this.formDiagnostico.get('patologia').setValue(paciente.patologia);
+        this.formDiagnostico.get('gingivitis').setValue(paciente.gingivitis);
+        this.formDiagnostico.get('mal_posiciones').setValue(paciente.mal_posiciones);
+        this.formDiagnostico.get('onicofagia').setValue(paciente.onicofagia);
+        this.formDiagnostico.get('succion_labial').setValue(paciente.succion_labial);
+        this.formDiagnostico.get('succion_digital').setValue(paciente.succion_digital);
+        this.formDiagnostico.get('interposicion_lingual').setValue(paciente.interposicion_lingual);
+      }
+    })
   }
 
   loadParams() {//se guardan los datos de la pantalla pasada para sobre escribir enn formulario data

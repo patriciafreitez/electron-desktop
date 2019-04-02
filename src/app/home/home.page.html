@@ -22,6 +22,7 @@
             <ion-item>
               <ion-label position="floating">* E.P.S:</ion-label>
               <ion-select formControlName="eps" 
+                [disabled]="soloVista"
                 okText="Seleccionar" 
                 cancelText="Cerrar"
                 [interfaceOptions]="interfaceOptions">
@@ -34,14 +35,14 @@
             </ion-item>
             <ion-item>
               <ion-label position="floating">* Nombre:</ion-label>
-              <ion-input formControlName="nombre"></ion-input>
+              <ion-input formControlName="nombre" [disabled]="soloVista"></ion-input>
               <div *ngIf="!formPersonales.controls.nombre.valid && formSubmit">
                 <small style = "color:red"> Campo Obligatorio</small>
               </div>
             </ion-item>
             <ion-item>
               <ion-label position="floating">* Apellido:</ion-label>
-              <ion-input formControlName="apellido"></ion-input>
+              <ion-input formControlName="apellido" [disabled]="soloVista"></ion-input>
               <div *ngIf="!formPersonales.controls.eps.valid && formSubmit">
                 <small style = "color:red"> Campo Obligatorio</small>
               </div>
@@ -49,6 +50,7 @@
             <ion-item>
               <ion-label position="floating">* Tipo de Documento:</ion-label>
               <ion-select formControlName="tipo_documento" 
+                [disabled]="soloVista"
                 okText="Seleccionar" 
                 cancelText="Cerrar"
                 [interfaceOptions]="interfaceOptions">
@@ -61,7 +63,7 @@
             </ion-item>
             <ion-item>
               <ion-label position="floating">* Numero de Identidad:</ion-label>
-              <ion-input formControlName="numero_identidad"></ion-input>
+              <ion-input formControlName="numero_identidad" [disabled]="soloVista"></ion-input>
               <div *ngIf="!formPersonales.controls.numero_identidad.valid && formSubmit">
                 <small style = "color:red"> Campo Obligatorio</small>
               </div>
@@ -69,6 +71,7 @@
             <ion-item>
               <ion-label position="floating">* Fecha de Nacimiento:</ion-label>
               <ion-datetime formControlName="fecha_nacimiento" 
+                [disabled]="soloVista"
                 pickerFormat="DD MMM, YYYY"
                 display-format="DD MMM, YYYY"
                 monthShortNames="Ene, Feb, Mar, Apr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
@@ -81,7 +84,7 @@
             </ion-item>
             <ion-item>
               <ion-label position="floating">* Lugar de Nacimiento:</ion-label>
-              <ion-input formControlName="lugar_nacimiento"></ion-input>
+              <ion-input formControlName="lugar_nacimiento" [disabled]="soloVista"></ion-input>
               <div *ngIf="!formPersonales.controls.lugar_nacimiento.valid && formSubmit">
                 <small style = "color:red"> Campo Obligatorio</small>
               </div>
@@ -89,6 +92,7 @@
             <ion-item>
               <ion-label position="floating">* Genero:</ion-label>
               <ion-select formControlName="genero" 
+                [disabled]="soloVista"
                 okText="Seleccionar" 
                 cancelText="Cerrar"
                 [interfaceOptions]="interfaceOptions">
@@ -102,6 +106,7 @@
             <ion-item>
               <ion-label position="floating">* Estado Civil:</ion-label>
               <ion-select formControlName="estado_civil" 
+                [disabled]="soloVista"
                 okText="Seleccionar" 
                 cancelText="Cerrar"
                 [interfaceOptions]="interfaceOptions">
@@ -115,6 +120,7 @@
             <ion-item> 
               <ion-label position="floating">* Nivel Educativo:</ion-label>
               <ion-select formControlName="nivel_educativo" 
+                [disabled]="soloVista"
                 okText="Seleccionar" 
                 cancelText="Cerrar"
                 [interfaceOptions]="interfaceOptions">
