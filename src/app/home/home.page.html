@@ -138,7 +138,7 @@
           <ion-list>
             <ion-item>
               <ion-label position="floating">* Historia Clinica:</ion-label>
-              <ion-input formControlName="historia_clinica"></ion-input>
+              <ion-input formControlName="historia_clinica" [disabled]="soloVista"></ion-input>
               <div *ngIf="!formPersonales.controls.historia_clinica.valid && formSubmit">
                 <small style = "color:red"> Campo Obligatorio</small>
               </div>
@@ -146,6 +146,7 @@
             <ion-item>
               <ion-label position="floating">* Fecha:</ion-label>
               <ion-datetime formControlName="fecha" 
+                [disabled]="soloVista"
                 pickerFormat="DD MMM, YYYY"
                 display-format="DD MMM, YYYY"
                 monthShortNames="Ene, Feb, Mar, Apr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
@@ -159,10 +160,11 @@
             <ion-item> 
               <ion-label position="floating">* Nivel Socioeconomico:</ion-label>
               <ion-select formControlName="nivel_socioeconomico" 
+                [disabled]="soloVista"
                 okText="Seleccionar" 
                 cancelText="Cerrar"
                 [interfaceOptions]="interfaceOptions">
-                  <ion-select-option *ngFor="let nivel_socioeconomico of nivelSocioeconomicoList$ | async"
+                <ion-select-option *ngFor="let nivel_socioeconomico of nivelSocioeconomicoList$ | async"
                   [value]="nivel_socioeconomico.descripcion">{{nivel_socioeconomico.descripcion}}</ion-select-option>
               </ion-select>
               <div *ngIf="!formPersonales.controls.nivel_socioeconomico.valid && formSubmit">
@@ -171,43 +173,43 @@
             </ion-item>
             <ion-item>
               <ion-label position="floating">* Ocupación:</ion-label>
-              <ion-input formControlName="ocupacion"></ion-input>
+              <ion-input formControlName="ocupacion" [disabled]="soloVista"></ion-input>
               <div *ngIf="!formPersonales.controls.ocupacion.valid && formSubmit">
                 <small style = "color:red"> Campo Obligatorio</small>
               </div>
             </ion-item>
             <ion-item>
               <ion-label position="floating">* Telefono Celular:</ion-label>
-              <ion-input formControlName="telefono_celular"></ion-input>
+              <ion-input formControlName="telefono_celular" [disabled]="soloVista"></ion-input>
               <div *ngIf="!formPersonales.controls.telefono_celular.valid && formSubmit">
                 <small style = "color:red"> Campo Obligatorio</small>
               </div>
             </ion-item>
             <ion-item>
               <ion-label position="floating">* Telefono Fijo:</ion-label>
-              <ion-input formControlName="telefono_fijo"></ion-input>
+              <ion-input formControlName="telefono_fijo" [disabled]="soloVista"></ion-input>
               <div *ngIf="!formPersonales.controls.telefono_fijo.valid && formSubmit">
                 <small style = "color:red"> Campo Obligatorio</small>
               </div>
             </ion-item>
             <ion-item>
               <ion-label position="floating"> Correo:</ion-label>
-              <ion-input formControlName="correo"></ion-input>
+              <ion-input formControlName="correo" [disabled]="soloVista"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">* Dierección:</ion-label>
-              <ion-input formControlName="direccion"></ion-input> <!--controla que el campo este valido-->
+              <ion-input formControlName="direccion" [disabled]="soloVista"></ion-input> <!--controla que el campo este valido-->
               <div *ngIf="!formPersonales.controls.direccion.valid && formSubmit"> <!--imprime un mensaje (rojo) que el campo es obligatorio cuando intentas dejarlo-->
                 <small style = "color:red"> Campo Obligatorio</small>
               </div>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Responsable:</ion-label>
-              <ion-input formControlName="responsable"></ion-input>
+              <ion-input formControlName="responsable" [disabled]="soloVista"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Telefono Responsable:</ion-label>
-              <ion-input formControlName="telefono_responsable"></ion-input>
+              <ion-input formControlName="telefono_responsable" [disabled]="soloVista"></ion-input>
             </ion-item>
           </ion-list>
         </ion-col>
