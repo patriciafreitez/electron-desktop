@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Storage } from '@ionic/storage';
 import { UserService } from '../service/db/user.service';
+import { MessageService } from '../service/message.service';
 
 @Component({
   selector: 'app-mensajeria',
@@ -18,7 +19,8 @@ export class MensajeriaPage implements OnInit {
     private navController: NavController,
     private angularFireAuth: AngularFireAuth,
     private storage: Storage,
-    private userService: UserService
+    private userService: UserService,
+    private messageService: MessageService
   ) {
     this.isUserRoot();
     
@@ -85,7 +87,11 @@ export class MensajeriaPage implements OnInit {
 
   }
   
-  ngOnInit() {}
+  ngOnInit() {
+    /*this.messageService.getChat().subscribe(chat =>{
+      console.log(chat);
+    })*/
+  }
 
   isUserRoot() {
     this.storage.get('email').then(email => {
