@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title >Banco de Pacientes</ion-title>
+    <ion-button slot="end" routerLink="/basico" *ngIf="isRoot">Registrar Pacientes</ion-button>
+    <ion-button slot="end" routerLink="/consultar">Consultar Pacientes</ion-button>
+    <ion-button slot="end" (click)="cerrarSesion()">Cerrar Sesion</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header>
+  <ion-toolbar>
+        <ion-title>
+            <h2><p>Publicaciones</p></h2>
+        </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ul>
+    <li *ngFor="let mensaje of mensajes">{{mensaje}}</li>
+  </ul>
+</ion-content>
+
+<ion-content>
+  <ion-footer padding>
+    <ion-list>
+      <ion-item>
+        <ion-textarea position="floating" [(ngModel)]="msj">Deje aqui su mensaje</ion-textarea> 
+      </ion-item>
+      <ion-item-sliding>
+        <ion-item-options side="end">
+          <ion-item-option (click)="unread(item)">Enviar</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </ion-footer>
+  <ion-item>
+      <ion-button (click)="sendMessage()">Enviar</ion-button> 
+  </ion-item>
+</ion-content>
