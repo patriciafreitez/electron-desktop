@@ -19,8 +19,9 @@ export class ConsultarPage implements OnInit {
   protected patologiaList: Array<Patologia> = [];
   protected pacientesList: Array<Paciente> = [];
   protected pacientesObservable: Array<Paciente> = [];
+  public listPacienteVacia = 'Buscando pacientes..';
   public rangoEdad = '';
-  public patologia = '';
+  public patologia = [];
 
   constructor(
     private navController: NavController,
@@ -60,38 +61,58 @@ export class ConsultarPage implements OnInit {
       this.pacientesList = data.slice(0);
       this.pacientesObservable = data.slice(0);
 
-      this.filterRangoEdad()
+      this.filtros();
     });
   }
 
+  async filtros() {
+    this.pacientesObservable = this.pacientesList.slice(0);
+    if(this.pacientesList.length > 0) {
+      this.filterRangoEdad()
+      this.filterPatologia();
+    }
+    this.listPacienteVacia = (this.pacientesList.length > 0 ? '' : 'No se encontraron resultados');
+  }
+
   async filterRangoEdad() {
-    if(this.rangoEdad === '') return;
-    console.log(this.pacientesObservable, this.pacientesList)
+    if(this.rangoEdad === '' || this.rangoEdad === 'Todos') return;
+    // Buscamos el rango de edad
+    const rango = this.rangoEdadList.find(rango => rango.descripcion === this.rangoEdad);
+    for(var index = 0; index < this.pacientesObservable.length; index++) {
+      const paciente: Paciente = this.pacientesObservable[index];
+      // Calculamos la diferencia en años entre la fecha de nacimiento y fecha actual
+      const fecha_nacimiento = moment(paciente.fecha_nacimiento);
+      const fecha_actual = moment();
+      const diff = fecha_actual.diff(fecha_nacimiento, 'years');
 
-    if(this.rangoEdad === 'Todos') {
-      this.pacientesObservable = this.pacientesList.slice(0);
-    } 
-    else {
-      this.pacientesObservable = this.pacientesList.slice(0);
-      const rango = this.rangoEdadList.find(rango => rango.descripcion === this.rangoEdad);
-      console.log('rango edad',rango)
-      for(var index = 0; index < this.pacientesObservable.length; index++) {
-        const paciente: Paciente = this.pacientesObservable[index];
-
-        const fecha_nacimiento = moment(paciente.fecha_nacimiento);
-        const fecha_actual = moment();
-        const diff = fecha_actual.diff(fecha_nacimiento, 'years');
-        console.log(diff, paciente.nombre, paciente.numero_identidad)
-        if(!(diff >= rango.min && diff <= rango.max)) {
-          this.pacientesObservable.splice((index), 1);
-          index--;
-        }
-      } 
-      
+      if(!(diff >= rango.min && diff <= rango.max)) {
+        this.pacientesObservable.splice((index), 1);
+        index--;
+      }
     }
   }
 
-  filterPatologia() {
+  async filterPatologia() {
+    if(this.patologia.length === 0) return;
+    // Buscamos los check que estan en true
+    var patologia = false, caries = false, ausencia_dental = false;
+    this.patologia.forEach((value) => {
+      switch(value) {
+        case "Auencia dental": ausencia_dental = true; break;
+        case "Caries": caries = true; break;
+        case "Patología atm": patologia = true; break;
+      }
+    })
 
+    for(var index = 0; index < this.pacientesObservable.length; index++) {
+      const paciente: Paciente = this.pacientesObservable[index];
+      // Descartamos los pacientes que no presentan alguna patologia
+      if(!((paciente.patologia && patologia) 
+        || (paciente.caries && caries) 
+        || (paciente.ausencia_dental && ausencia_dental))) {
+          this.pacientesObservable.splice((index), 1);
+          index--;
+      }
+    }
   }
 }

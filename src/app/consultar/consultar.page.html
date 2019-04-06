@@ -15,7 +15,7 @@
         <ion-list>
           <ion-item>
             <ion-label position="floating">Rango de edad:</ion-label>
-            <ion-select (ionChange)="filterRangoEdad()"
+            <ion-select (ionChange)="filtros()"
               [(ngModel)]="rangoEdad"
               okText="Seleccionar" 
               cancelText="Cerrar">
@@ -30,8 +30,9 @@
         <ion-list>
           <ion-item> 
             <ion-label position="floating">Patología:</ion-label>
-            <ion-select (ionChange)="filterPatologia()"
+            <ion-select (ionChange)="filtros()"
               [(ngModel)]="patologia"
+              multiple="true"
               okText="Seleccionar" 
               cancelText="Cerrar">
               <ion-select-option *ngFor="let patologia of patologiaList"
@@ -70,6 +71,9 @@
       </ion-col>
       
     </ion-item>
+
+    <ion-item *ngIf="listPacienteVacia !== ''">{{listPacienteVacia}}</ion-item>
+
     <ion-item class="ion-padding-horizontal"
       *ngFor="let paciente of pacientesObservable"
       (click)="verPaciente(paciente)">

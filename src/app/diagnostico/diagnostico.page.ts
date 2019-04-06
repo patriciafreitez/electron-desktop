@@ -42,6 +42,8 @@ export class DiagnosticoPage implements OnInit {
         this.formDiagnostico.get('cariados').setValue(paciente.cariados);
         this.formDiagnostico.get('opturados').setValue(paciente.opturados);
         this.formDiagnostico.get('perdidos').setValue(paciente.perdidos);
+        this.formDiagnostico.get('ausencia_dental').setValue(paciente.ausencia_dental);
+        this.formDiagnostico.get('caries').setValue(paciente.caries);
         this.formDiagnostico.get('patologia').setValue(paciente.patologia);
         this.formDiagnostico.get('gingivitis').setValue(paciente.gingivitis);
         this.formDiagnostico.get('mal_posiciones').setValue(paciente.mal_posiciones);
@@ -62,6 +64,8 @@ export class DiagnosticoPage implements OnInit {
         this.formDiagnostico.get('perdidos').setValue(formDiagnostico.perdidos);
         this.formDiagnostico.get('periodontitis').setValue(formDiagnostico.periodontitis);
         this.formDiagnostico.get('patologia').setValue(formDiagnostico.patologia);
+        this.formDiagnostico.get('ausencia_dental').setValue(formDiagnostico.ausencia_dental);
+        this.formDiagnostico.get('caries').setValue(formDiagnostico.caries);
         this.formDiagnostico.get('gingivitis').setValue(formDiagnostico.gingivitis);
         this.formDiagnostico.get('mal_posiciones').setValue(formDiagnostico.mal_posiciones);
         this.formDiagnostico.get('onicofagia').setValue(formDiagnostico.onicofagia);
@@ -77,7 +81,9 @@ export class DiagnosticoPage implements OnInit {
       cariados:             ['', Validators.compose([Validators.required])],
       opturados:            ['', Validators.compose([Validators.required])],
       perdidos:             ['', Validators.compose([Validators.required])],
-      periodontitis:        [''],//false xq son checkboox
+      periodontitis:        [''],
+      ausencia_dental:      [false], //false xq son checkboox
+      caries:               [false],
       patologia:            [false],
       gingivitis:           [false],
       mal_posiciones:       ['', Validators.compose([Validators.required])],
@@ -104,6 +110,8 @@ export class DiagnosticoPage implements OnInit {
           perdidos:             value.perdidos,
           periodontitis:        value.periodontitis === undefined ? false : value.periodontitis,
           patologia:            value.patologia === undefined ? false : value.patologia,
+          ausencia_dental:      value.ausencia_dental === undefined ? false : value.ausencia_dental,
+          caries:               value.caries === undefined ? false : value.caries,
           gingivitis:           value.gingivitis === undefined ? false : value.gingivitis,
           mal_posiciones:       value.mal_posiciones,
           onicofagia:           value.onicofagia === undefined ? false : value.onicofagia,

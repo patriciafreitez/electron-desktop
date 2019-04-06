@@ -45,6 +45,8 @@ export class Paciente {
     gingivitis?: boolean;
     periodontitis?: string;
     patologia?: boolean;
+    caries?: boolean;
+    ausencia_dental?: boolean;
     mal_posiciones: string;
     onicofagia?: boolean;
     succion_labial?: boolean;
