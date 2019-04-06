@@ -43,7 +43,7 @@ export class Paciente {
     opturados: string;
     perdidos: string;
     gingivitis?: boolean;
-    periodontitis?: boolean;
+    periodontitis?: string;
     patologia?: boolean;
     mal_posiciones: string;
     onicofagia?: boolean;

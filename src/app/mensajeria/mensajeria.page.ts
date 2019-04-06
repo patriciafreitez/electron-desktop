@@ -88,7 +88,9 @@ export class MensajeriaPage implements OnInit {
   abrirFormulario() {
     const params = { disabled: false, paciente: null };
     this.storage.set('disabled', params).then(() => {
-      this.navController.navigateForward('basico');
+      this.storage.remove('form').then(() =>
+        this.navController.navigateForward('basico')
+      );
     })
   }
 

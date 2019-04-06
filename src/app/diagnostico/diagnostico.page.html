@@ -49,12 +49,13 @@
             </ion-item>
             <ion-item> 
               <ion-label position="floating">Periodonditis:</ion-label>
-              <ion-select formControlName="periodontitis" 
+              <ion-select #selectPeriodontitis
+                formControlName="periodontitis" 
                 [disabled]="soloVista"
                 okText="Seleccionar" 
                 cancelText="Cerrar"
                 [interfaceOptions]="interfaceOptions">
-                <ion-select-option *ngFor="let periodontitis of periodontitisist$ | async"
+                <ion-select-option *ngFor="let periodontitis of periodontitisist$"
                   [value]="periodontitis.descripcion">{{periodontitis.descripcion}}</ion-select-option>
               </ion-select>
             </ion-item>

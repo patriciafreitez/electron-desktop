@@ -21,13 +21,15 @@
           <ion-list>
             <ion-item>
               <ion-label position="floating">* E.P.S:</ion-label>
-              <ion-select formControlName="eps" 
-                [disabled]="soloVista"
+              <ion-select #selectEps
+                formControlName="eps"
+                [disabled]="soloVista" 
                 okText="Seleccionar" 
                 cancelText="Cerrar"
                 [interfaceOptions]="interfaceOptions">
-                <ion-select-option *ngFor="let eps of epsList$ | async"
-                [value]="eps.descripcion">{{eps.descripcion}}</ion-select-option>
+                <ion-select-option *ngFor="let eps of epsList$"
+                  [value]="eps.descripcion"
+                  >{{eps.descripcion}}</ion-select-option>
               </ion-select>
               <div *ngIf="!formPersonales.controls.eps.valid && formSubmit">
                <small style = "color:red"> Campo Obligatorio</small>
@@ -49,12 +51,13 @@
             </ion-item>
             <ion-item>
               <ion-label position="floating">* Tipo de Documento:</ion-label>
-              <ion-select formControlName="tipo_documento" 
+              <ion-select #selectTipoDocumento
+                formControlName="tipo_documento" 
                 [disabled]="soloVista"
                 okText="Seleccionar" 
                 cancelText="Cerrar"
                 [interfaceOptions]="interfaceOptions">
-                <ion-select-option *ngFor="let tipo_documento of tipoDocumentoList$ | async"
+                <ion-select-option *ngFor="let tipo_documento of tipoDocumentoList$"
                 [value]="tipo_documento.descripcion">{{tipo_documento.descripcion}}</ion-select-option>
               </ion-select>
               <div *ngIf="!formPersonales.controls.tipo_documento.valid && formSubmit">
@@ -91,12 +94,13 @@
             </ion-item>
             <ion-item>
               <ion-label position="floating">* Genero:</ion-label>
-              <ion-select formControlName="genero" 
+              <ion-select #selectGenero
+                formControlName="genero" 
                 [disabled]="soloVista"
                 okText="Seleccionar" 
                 cancelText="Cerrar"
                 [interfaceOptions]="interfaceOptions">
-                <ion-select-option *ngFor="let genero of generoList$ | async"
+                <ion-select-option *ngFor="let genero of generoList$"
                 [value]="genero.descripcion">{{genero.descripcion}}</ion-select-option>
               </ion-select>
               <div *ngIf="!formPersonales.controls.genero.valid && formSubmit">
@@ -105,12 +109,13 @@
             </ion-item>
             <ion-item>
               <ion-label position="floating">* Estado Civil:</ion-label>
-              <ion-select formControlName="estado_civil" 
+              <ion-select #selectEstadoCivil
+                formControlName="estado_civil" 
                 [disabled]="soloVista"
                 okText="Seleccionar" 
                 cancelText="Cerrar"
                 [interfaceOptions]="interfaceOptions">
-                <ion-select-option *ngFor="let estado_civil of estadoCivilList$ | async"
+                <ion-select-option *ngFor="let estado_civil of estadoCivilList$"
                   [value]="estado_civil.descripcion">{{estado_civil.descripcion}}</ion-select-option>
               </ion-select>
               <div *ngIf="!formPersonales.controls.estado_civil.valid && formSubmit">
@@ -119,12 +124,13 @@
             </ion-item>
             <ion-item> 
               <ion-label position="floating">* Nivel Educativo:</ion-label>
-              <ion-select formControlName="nivel_educativo" 
+              <ion-select #selectNivelEducativo
+                formControlName="nivel_educativo" 
                 [disabled]="soloVista"
                 okText="Seleccionar" 
                 cancelText="Cerrar"
                 [interfaceOptions]="interfaceOptions">
-                  <ion-select-option *ngFor="let nivel_educativo of nivelEducativoList$ | async"
+                  <ion-select-option *ngFor="let nivel_educativo of nivelEducativoList$"
                   [value]="nivel_educativo.descripcion">{{nivel_educativo.descripcion}}</ion-select-option>
               </ion-select>
               <div *ngIf="!formPersonales.controls.nivel_educativo.valid && formSubmit">
@@ -159,12 +165,13 @@
             </ion-item>
             <ion-item> 
               <ion-label position="floating">* Nivel Socioeconomico:</ion-label>
-              <ion-select formControlName="nivel_socioeconomico" 
+              <ion-select #selectNivelSocioeconomico
+                formControlName="nivel_socioeconomico" 
                 [disabled]="soloVista"
                 okText="Seleccionar" 
                 cancelText="Cerrar"
                 [interfaceOptions]="interfaceOptions">
-                <ion-select-option *ngFor="let nivel_socioeconomico of nivelSocioeconomicoList$ | async"
+                <ion-select-option *ngFor="let nivel_socioeconomico of nivelSocioeconomicoList$"
                   [value]="nivel_socioeconomico.descripcion">{{nivel_socioeconomico.descripcion}}</ion-select-option>
               </ion-select>
               <div *ngIf="!formPersonales.controls.nivel_socioeconomico.valid && formSubmit">

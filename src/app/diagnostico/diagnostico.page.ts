@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { NavController, IonSelect } from '@ionic/angular';
 import { PacienteService } from '../service/db/paciente.service';
 import { PeriodontitisService } from '../service/db/periodontitis.service';
 import { Periodontitis } from '../models/periodontitis';
-import {Observable} from 'rxjs';
 import { Paciente } from '../models/paciente';
 
 @Component({
@@ -14,11 +13,14 @@ import { Paciente } from '../models/paciente';
   styleUrls: ['./diagnostico.page.scss'],
 })
 export class DiagnosticoPage implements OnInit {
+  @ViewChild('selectPeriodontitis') selectPeriodontitis: IonSelect;
+
   public formDiagnostico: FormGroup;
   public formSubmit = false;
   public interfaceOptions = { cssClass: 'custom-select' }
-  public periodontitisist$: Observable<Periodontitis[]>;
+  public periodontitisist$: Array<Periodontitis> = [];
   public soloVista: false;
+  private paciente: Paciente = null;
 
   constructor(
     private formBuilder: FormBuilder,//libreria a importar
@@ -40,7 +42,6 @@ export class DiagnosticoPage implements OnInit {
         this.formDiagnostico.get('cariados').setValue(paciente.cariados);
         this.formDiagnostico.get('opturados').setValue(paciente.opturados);
         this.formDiagnostico.get('perdidos').setValue(paciente.perdidos);
-        this.formDiagnostico.get('periodontitis').setValue(paciente.periodontitis);
         this.formDiagnostico.get('patologia').setValue(paciente.patologia);
         this.formDiagnostico.get('gingivitis').setValue(paciente.gingivitis);
         this.formDiagnostico.get('mal_posiciones').setValue(paciente.mal_posiciones);
@@ -76,7 +77,7 @@ export class DiagnosticoPage implements OnInit {
       cariados:             ['', Validators.compose([Validators.required])],
       opturados:            ['', Validators.compose([Validators.required])],
       perdidos:             ['', Validators.compose([Validators.required])],
-      periodontitis:        [false],//false xq son checkboox
+      periodontitis:        [''],//false xq son checkboox
       patologia:            [false],
       gingivitis:           [false],
       mal_posiciones:       ['', Validators.compose([Validators.required])],
@@ -143,6 +144,12 @@ export class DiagnosticoPage implements OnInit {
   }
 
   _loadPeriodontitis(){
-    this.periodontitisist$ = this.periodontitisService.getPeriodontitis().valueChanges();
+    this.periodontitisService.getPeriodontitis().valueChanges().subscribe((data) => {
+      this.periodontitisist$ = data
+      if(this.paciente !== null) {
+        this.selectPeriodontitis.selectedText = this.paciente.periodontitis
+        this.formDiagnostico.get('periodontitis').setValue(this.paciente.periodontitis);
+      }
+    });
   }
 }

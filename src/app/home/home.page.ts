@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {NavController} from '@ionic/angular';
-import {Observable} from 'rxjs';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {NavController, IonSelect} from '@ionic/angular';
 import {UserService} from '../service/db/user.service';
 import { Storage } from '@ionic/storage';//importar manual
 
@@ -26,17 +25,26 @@ import { Paciente } from '../models/paciente';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  @ViewChild('selectEps') selectEps: IonSelect;
+  @ViewChild('selectTipoDocumento') selectTipoDocumento: IonSelect;
+  @ViewChild('selectGenero') selectGenero: IonSelect;
+  @ViewChild('selectNivelEducativo') selectNivelEducativo: IonSelect;
+  @ViewChild('selectNivelSocioeconomico') selectNivelSocioeconomico: IonSelect;
+  @ViewChild('selectEstadoCivil') selectEstadoCivil: IonSelect;
+
   private formularioData: any = {};
   public formPersonales: FormGroup;
   public formSubmit = false;
   public interfaceOptions = { cssClass: 'custom-select' }
-  public epsList$: Observable<Eps[]>;
-  public tipoDocumentoList$: Observable<TipoDocumento[]>;
-  public generoList$: Observable<Genero[]>; 
-  public estadoCivilList$: Observable<EstadoCivil[]>;
-  public nivelSocioeconomicoList$: Observable<NivelSocioeconomico[]>;
-  public nivelEducativoList$: Observable<NivelEducativo[]>;
   public soloVista: false;
+  private paciente: Paciente = null;
+
+  public epsList$: Array<Eps> = [];
+  public tipoDocumentoList$: Array<TipoDocumento> = [];
+  public generoList$: Array<Genero> = []; 
+  public estadoCivilList$: Array<EstadoCivil> = [];
+  public nivelSocioeconomicoList$: Array<NivelSocioeconomico> = [];
+  public nivelEducativoList$: Array<NivelEducativo> = [];
 
   constructor(
     public userService: UserService,
@@ -58,29 +66,26 @@ export class HomePage implements OnInit {
   verPaciente() {
     this.storage.get('disabled').then((data) => {
       this.soloVista = data.disabled;
-      if(data.paciente !== null) {
-        const paciente: Paciente = data.paciente;
-        this.formPersonales.get('eps').setValue(paciente.eps);
-        this.formPersonales.get('nombre').setValue(paciente.nombre);
-        this.formPersonales.get('apellido').setValue(paciente.apellido);
-        this.formPersonales.get('tipo_documento').setValue(paciente.tipo_documento);
-        this.formPersonales.get('numero_identidad').setValue(paciente.numero_identidad);
-        this.formPersonales.get('lugar_nacimiento').setValue(paciente.lugar_nacimiento);
-        this.formPersonales.get('genero').setValue(paciente.genero);
-        this.formPersonales.get('estado_civil').setValue(paciente.estado_civil);
-        this.formPersonales.get('nivel_educativo').setValue(paciente.nivel_educativo);
-        this.formPersonales.get('historia_clinica').setValue(paciente.historia_clinica);
-        this.formPersonales.get('fecha_nacimiento').setValue(paciente.fecha_nacimiento);
-        this.formPersonales.get('fecha').setValue(paciente.fecha);
-        this.formPersonales.get('nivel_socioeconomico').setValue(paciente.nivel_socioeconomico);
-        this.formPersonales.get('ocupacion').setValue(paciente.ocupacion);
-        this.formPersonales.get('telefono_celular').setValue(paciente.telefono_celular);
-        this.formPersonales.get('telefono_fijo').setValue(paciente.telefono_fijo);
-        this.formPersonales.get('correo').setValue(paciente.correo);
-        this.formPersonales.get('direccion').setValue(paciente.direccion);
-        this.formPersonales.get('responsable').setValue(paciente.responsable);
-        this.formPersonales.get('telefono_responsable').setValue(paciente.telefono_responsable);
+      this.paciente = data.paciente;
+
+      if(this.paciente !== null) {
+        console.log(this.paciente)
+        this.formPersonales.get('nombre').setValue(this.paciente.nombre);
+        this.formPersonales.get('apellido').setValue(this.paciente.apellido);
+        this.formPersonales.get('numero_identidad').setValue(this.paciente.numero_identidad);
+        this.formPersonales.get('lugar_nacimiento').setValue(this.paciente.lugar_nacimiento);
+        this.formPersonales.get('historia_clinica').setValue(this.paciente.historia_clinica);
+        this.formPersonales.get('fecha_nacimiento').setValue(this.paciente.fecha_nacimiento);
+        this.formPersonales.get('fecha').setValue(this.paciente.fecha);
+        this.formPersonales.get('ocupacion').setValue(this.paciente.ocupacion);
+        this.formPersonales.get('telefono_celular').setValue(this.paciente.telefono_celular);
+        this.formPersonales.get('telefono_fijo').setValue(this.paciente.telefono_fijo);
+        this.formPersonales.get('correo').setValue(this.paciente.correo);
+        this.formPersonales.get('direccion').setValue(this.paciente.direccion);
+        this.formPersonales.get('responsable').setValue(this.paciente.responsable);
+        this.formPersonales.get('telefono_responsable').setValue(this.paciente.telefono_responsable);
       }
+     
     })
   }
 
@@ -177,21 +182,57 @@ export class HomePage implements OnInit {
   }
 
   _loadEps(){
-    this.epsList$ = this.epsService.getEpsList().valueChanges();
+    this.epsService.getEpsList().valueChanges().subscribe((data) => {
+      this.epsList$ = data
+      if(this.paciente !== null) {
+        this.selectEps.selectedText = this.paciente.eps;
+        this.formPersonales.get('eps').setValue(this.paciente.eps)
+      }
+    });
   }
   _loadTipoDocumento() {
-    this.tipoDocumentoList$ = this.tipoDocumentoService.getTipoDocumentoList().valueChanges();
+    this.tipoDocumentoService.getTipoDocumentoList().valueChanges().subscribe((data) => {
+      this.tipoDocumentoList$ = data
+      if(this.paciente !== null) {
+        this.selectTipoDocumento.selectedText = this.paciente.tipo_documento
+        this.formPersonales.get('tipo_documento').setValue(this.paciente.tipo_documento);
+      }
+    });
   }
   _loadGenero() {
-    this.generoList$ = this.generoService.getGeneroList().valueChanges();
+    this.generoService.getGeneroList().valueChanges().subscribe((data) => {
+      this.generoList$ = data
+      if(this.paciente !== null) {
+        this.selectGenero.selectedText = this.paciente.genero
+        this.formPersonales.get('genero').setValue(this.paciente.genero);
+      }
+    });
   }
   _loadEstadoCivil() {
-    this.estadoCivilList$ = this.estadoCivilService.getEstadoCivilList().valueChanges();
+    this.estadoCivilService.getEstadoCivilList().valueChanges().subscribe((data) => {
+      this.estadoCivilList$ = data
+      if(this.paciente !== null) {
+        this.selectEstadoCivil.selectedText = this.paciente.estado_civil
+        this.formPersonales.get('estado_civil').setValue(this.paciente.estado_civil);
+      }
+    });
   }
   _loadNivelSocioeconomico() {
-    this.nivelSocioeconomicoList$ = this.nivelSocioeconomicoService.getNivelSocioeconomicoList().valueChanges();
+    this.nivelSocioeconomicoService.getNivelSocioeconomicoList().valueChanges().subscribe((data) => {
+      this.nivelSocioeconomicoList$ = data
+      if(this.paciente !== null) {
+        this.selectNivelSocioeconomico.selectedText = this.paciente.nivel_socioeconomico
+        this.formPersonales.get('nivel_socioeconomico').setValue(this.paciente.nivel_socioeconomico);
+      }
+    });
   }
   _loadNivelEducativo() {
-    this.nivelEducativoList$ = this.nivelEducativoService.getNivelEducativoList().valueChanges();
+    this.nivelEducativoService.getNivelEducativoList().valueChanges().subscribe((data) => {
+      this.nivelEducativoList$ = data
+      if(this.paciente !== null) {
+        this.selectNivelEducativo.selectedText = this.paciente.nivel_educativo
+        this.formPersonales.get('nivel_educativo').setValue(this.paciente.nivel_educativo);
+      }
+    });
   }  
 }

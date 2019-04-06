@@ -7,6 +7,7 @@ import { Paciente } from '../models/paciente';
 import { PacienteService } from '../service/db/paciente.service';
 import { Storage } from '@ionic/storage';//importar manual
 import {NavController} from '@ionic/angular';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-consultar',
@@ -17,7 +18,7 @@ export class ConsultarPage implements OnInit {
   protected rangoEdadList: Array<RangoEdad> = [];
   protected patologiaList: Array<Patologia> = [];
   protected pacientesList: Array<Paciente> = [];
-  protected pacientesFilter: Array<Paciente> = [];
+  protected pacientesObservable: Array<Paciente> = [];
   public rangoEdad = '';
   public patologia = '';
 
@@ -56,20 +57,37 @@ export class ConsultarPage implements OnInit {
 
   _loadPaciente() {
     this.pacienteService.getPaciente().valueChanges().subscribe((data) => {
-      this.pacientesList = data;
-      this.pacientesFilter = data;
+      this.pacientesList = data.slice(0);
+      this.pacientesObservable = data.slice(0);
+
+      this.filterRangoEdad()
     });
   }
 
   async filterRangoEdad() {
+    if(this.rangoEdad === '') return;
+    console.log(this.pacientesObservable, this.pacientesList)
+
     if(this.rangoEdad === 'Todos') {
-      this.pacientesFilter = this.pacientesList;
+      this.pacientesObservable = this.pacientesList.slice(0);
     } 
     else {
+      this.pacientesObservable = this.pacientesList.slice(0);
       const rango = this.rangoEdadList.find(rango => rango.descripcion === this.rangoEdad);
-      this.pacientesFilter.forEach((paciente, index) => {
-       
-      })
+      console.log('rango edad',rango)
+      for(var index = 0; index < this.pacientesObservable.length; index++) {
+        const paciente: Paciente = this.pacientesObservable[index];
+
+        const fecha_nacimiento = moment(paciente.fecha_nacimiento);
+        const fecha_actual = moment();
+        const diff = fecha_actual.diff(fecha_nacimiento, 'years');
+        console.log(diff, paciente.nombre, paciente.numero_identidad)
+        if(!(diff >= rango.min && diff <= rango.max)) {
+          this.pacientesObservable.splice((index), 1);
+          index--;
+        }
+      } 
+      
     }
   }
 

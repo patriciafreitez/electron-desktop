@@ -50,8 +50,8 @@
     </ion-row>
   </ion-grid>
     
-  <ion-grid class="grid" class="ion-margin-top">
-    <ion-row class="ion-padding-horizontal">
+  <ion-list class="ion-margin-top">
+    <ion-item class="ion-padding-horizontal">
      
       <ion-col size="2">
         <b>Número Identificación</b>
@@ -66,12 +66,12 @@
         <b>Teléfono</b>
       </ion-col>
       <ion-col size="2">
-        <b>Patología</b>
+        <b>Observación</b>
       </ion-col>
       
-    </ion-row>
-    <ion-row class="ion-padding-horizontal"
-      *ngFor="let paciente of pacientesFilter"
+    </ion-item>
+    <ion-item class="ion-padding-horizontal"
+      *ngFor="let paciente of pacientesObservable"
       (click)="verPaciente(paciente)">
 
       <ion-col size="2">
@@ -90,7 +90,7 @@
           <ion-text>{{ paciente.observaciones }}</ion-text>
         </ion-col>
 
-    </ion-row>
-  </ion-grid>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
