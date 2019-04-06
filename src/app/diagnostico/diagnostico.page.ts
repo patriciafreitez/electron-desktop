@@ -130,14 +130,12 @@ export class DiagnosticoPage implements OnInit {
   registrar(){
     if(this.formDiagnostico.valid) {
       this.guardarForm().then((data) => {
-        console.log(data);
         var user: any = {};
         for(let key in data){
           for(let key2 in data[key]){
             user[key2] = data[key][key2]
           }
         }
-      console.log(user);
       this.pacienteService.addPaciente(user);
       this.storage.remove('form');
       this.navController.navigateBack('mensajeria');

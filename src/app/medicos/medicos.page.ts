@@ -112,9 +112,7 @@ export class MedicosPage implements OnInit {
   }
 
   validateFormMedicos() {
-    console.log(this.formMedicos.value);
     if(this.formMedicos.valid) {
-
       this.guardarForm().then(()=>{
         this.navController.navigateForward('diagnostico');
       })

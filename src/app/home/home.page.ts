@@ -69,7 +69,6 @@ export class HomePage implements OnInit {
       this.paciente = data.paciente;
 
       if(this.paciente !== null) {
-        console.log(this.paciente)
         this.formPersonales.get('nombre').setValue(this.paciente.nombre);
         this.formPersonales.get('apellido').setValue(this.paciente.apellido);
         this.formPersonales.get('numero_identidad').setValue(this.paciente.numero_identidad);
@@ -123,7 +122,6 @@ export class HomePage implements OnInit {
   }
 
   validateFormPersonal() {
-    console.log(this.formPersonales.value);
     if(this.formPersonales.valid) {
       this.guardarForm().then(() => {
         this.navController.navigateForward('medicos');

@@ -25,18 +25,15 @@ export class LoginPage implements OnInit {
 
   register() {
     this.angularFireAuth.auth.createUserWithEmailAndPassword(this.email, this.pass).then(res => {
-      console.log(res);
       this.navController.navigateRoot(['basico']);
     });
   }
 
   login() {
     this.angularFireAuth.auth.signInWithEmailAndPassword(this.email, this.pass).then(res => {
-      console.log(res);
       this.storage.set('email', this.email);
       this.navController.navigateRoot(['mensajeria']);
     }).catch( (error) => {
-      console.log(error);
       switch (error.code) {
         case FirebaseAuth.INVALID_EMAIL:
           this.message.alertOk('Información', '', 'Ingrese un email valido.');

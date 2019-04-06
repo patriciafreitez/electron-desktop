@@ -31,8 +31,6 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      console.log('ready');
-
       this.angularFireAuth.auth.onAuthStateChanged((user) => {
         if (user) {
            this.navController.navigateRoot(['mensajeria']);

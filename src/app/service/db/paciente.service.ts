@@ -23,15 +23,12 @@ export class PacienteService {
   }
   
   addAllPaciente(paciente: any) {
-    console.log('addAllpacientes')
     paciente.forEach((element:Paciente) => {
-      console.log('addAllpacientes_for')
       this.addPaciente(element)
     });
   }
 
   editPaciente(paciente: Paciente) {
-    console.log('addAllpaciente', paciente)
     return this.pacienteListRef.update(paciente.key, paciente);
   }
 
