@@ -36,9 +36,9 @@ export class MensajeriaPage implements OnInit {
 
     var arrayMensaje: any=[
       { contenido: "mensaje 1" },
-      { date: "fecha" }
+      { date: Date }
     ]
-   // messageService.addAllMensaje(arrayMensaje);
+    //messageService.addAllMensaje(arrayMensaje);
     
     var arrayEps: any=[
       { descripcion: "Subsidiado" },
@@ -102,19 +102,12 @@ export class MensajeriaPage implements OnInit {
     //periodontitisService.addAllPeriodontitis(arrayPatalogia)
 
   }
-  
-  sendMessage(){
-
+  enviarMensaje(){
     const mensaje : Mensaje = {
     contenido : this.msj,
     date : new Date()
     }
-  this.messageService.sendMsgToFirebase(mensaje, contenido);
-  this.msj = "";
-  }
-
-  enviarMensaje(){
-    this.mensajes.push(this.mensaje); 
+    this.messageService.addMensaje(mensaje); 
   }
 
   /*enviarMensaje(){

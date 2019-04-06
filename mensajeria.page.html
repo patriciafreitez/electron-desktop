@@ -17,7 +17,8 @@
 
 <ion-content padding>
   <ul>
-    <li *ngFor="let mensaje of mensajes">{{mensaje}}</li>
+    <ion-input formControlName="mensaje" [disabled]="soloVista"></ion-input>
+    <ion-content *ngFor="let mensajeria of mensajeList$">{{mensaje.contenido}}</ion-content>
   </ul>
 </ion-content>
 
@@ -25,16 +26,11 @@
   <ion-footer padding>
     <ion-list>
       <ion-item>
-        <ion-textarea position="floating" [(ngModel)]="msj">Deje aqui su mensaje</ion-textarea> 
+        <ion-textarea position="floating" [(ngModel)]="mensaje">Deje aqui su mensaje</ion-textarea> 
       </ion-item>
-      <ion-item-sliding>
-        <ion-item-options side="end">
-          <ion-item-option (click)="unread(item)">Enviar</ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
     </ion-list>
   </ion-footer>
   <ion-item>
-      <ion-button (click)="sendMessage()">Enviar</ion-button> 
+      <ion-button (click)="enviarMensaje()">Enviar</ion-button> 
   </ion-item>
 </ion-content>
