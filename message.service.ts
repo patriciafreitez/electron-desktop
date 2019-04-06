@@ -34,11 +34,11 @@ export class MessageService {
   /*getMensajes(id : string) { //retorna un solo observable
     return this.db.list('/mensaje-list').doc(id).valueChanges();
   }*/
-  sendMsgToFirebase(mensaje: Mensaje, contenido : string){
+  /*sendMsgToFirebase(mensaje: Mensaje, contenido : string){
     this.db.list<Mensaje>('mensaje-list').doc(mensaje.key).update({
       mensajes : firestore.FieldValue.arrayUnion(mensaje),
     })
-  }
+  }*/
   getMensajeList() {
     return this.mensajeListRef;
   }
