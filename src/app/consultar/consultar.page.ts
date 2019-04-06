@@ -9,6 +9,8 @@ import { Storage } from '@ionic/storage';//importar manual
 import {NavController} from '@ionic/angular';
 import * as moment from 'moment';
 
+declare let jsPDF;
+
 @Component({
   selector: 'app-consultar',
   templateUrl: './consultar.page.html',
@@ -20,6 +22,7 @@ export class ConsultarPage implements OnInit {
   protected pacientesList: Array<Paciente> = [];
   protected pacientesObservable: Array<Paciente> = [];
   public listPacienteVacia = 'Buscando pacientes..';
+  public pdfIsGenerate = false;
   public rangoEdad = '';
   public patologia = [];
 
@@ -114,5 +117,39 @@ export class ConsultarPage implements OnInit {
           index--;
       }
     }
+  }
+
+  async generatePdf() {
+    this.pdfIsGenerate = true;
+    var doc = new jsPDF(),
+        rows = [],
+        headers = [
+      "Número Identificación",
+      "Nombre y Apellido", 
+      "Dirección", 
+      "Teléfonos", 
+      "Observación"
+    ];
+    
+    this.pacientesObservable.forEach((paciente: Paciente) => {
+      var temp = [
+        paciente.numero_identidad,
+        `${paciente.nombre} ${paciente.apellido}`,
+        paciente.direccion,
+        `${paciente.telefono_celular} \n${paciente.telefono_fijo}`,
+        paciente.observaciones
+      ]
+      rows.push(temp);
+    })
+
+    doc.text('Listado de pacientes', 14, 15)
+    doc.autoTable({ 
+      head: [headers],
+      body: rows,
+      startY: 20
+    });
+
+    doc.save('listado de pacientes.pdf')
+    this.pdfIsGenerate = false;
   }
 }
