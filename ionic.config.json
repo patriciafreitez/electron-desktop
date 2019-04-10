@@ -1,5 +1,5 @@
 {
-  "name": "desktop",
+  "name": "Banco de Pacientes",
   "integrations": {
     "cordova": {}
   },
