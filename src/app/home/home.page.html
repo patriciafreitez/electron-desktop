@@ -3,7 +3,7 @@
     <ion-title >
       Formulario Datos Personales
     </ion-title>
-    <ion-button routerLink="/mensajeria" fill="clear" slot="start">
+    <ion-button (click)="irAtras()" fill="clear" slot="start">
       <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
     </ion-button>
     <ion-button (click)="validateFormPersonal()" fill="clear" slot="end">

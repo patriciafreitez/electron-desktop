@@ -58,7 +58,6 @@ export class HomePage implements OnInit {
     private nivelSocioeconomicoService: NivelSocioeconomicoService,
     private nivelEducativoService: NivelEducativoService
     ) {
-      this.isUserRoot();
       this.construirValidaciones()
       this.verPaciente();
   }
@@ -86,14 +85,6 @@ export class HomePage implements OnInit {
       }
      
     })
-  }
-
-  isUserRoot() {
-    this.storage.get('root').then((isRoot: boolean) => {
-      if(!isRoot) {
-        this.navController.navigateRoot(['mensajeria']);
-      }
-    });
   }
 
   construirValidaciones(){
@@ -233,4 +224,8 @@ export class HomePage implements OnInit {
       }
     });
   }  
+
+  irAtras() {
+    this.navController.pop();
+  }
 }

@@ -1,12 +1,27 @@
 import { Injectable } from '@angular/core';
 import {AlertController} from '@ionic/angular';
 
+import { Mensaje } from 'src/app/models/mensaje';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { firestore } from 'firebase';
+import { Key } from 'protractor';
+
+/*export interface mensaje {
+  key?: string;
+  contenido: string;
+  date : Date;
+}*/
+
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
 
-  constructor(public alertController: AlertController) { }
+  private mensajeListRef = this.db.list<Mensaje>('mensaje-list');
+  
+  constructor(
+    private db: AngularFireDatabase,
+    public alertController: AlertController) { }
 
   async alertOk(titulo: string, subtitulo: string, mensaje: string) {
     const alert = await this.alertController.create({
@@ -18,4 +33,26 @@ export class MessageService {
 
     await alert.present();
   }
+
+  getMensajeList() {
+    return this.mensajeListRef;
+  }
+  filterByDescripcion(contenido: string) {
+    return this.db.list('/mensaje-list', ref => ref.orderByChild('contenido').equalTo(contenido));
+  }
+  addMensaje(mensaje: Mensaje) {
+    return this.mensajeListRef.push(mensaje);
+  }
+  addAllMensaje(mensaje: any) {
+    mensaje.forEach((element:Mensaje) => {
+      this.addMensaje(element)
+      });
+    }
+  editMensaje(mensaje: Mensaje) {
+    return this.mensajeListRef.update(mensaje.key, mensaje);
+  }
+  removeMensaje(mensaje: Mensaje) {
+    return this.mensajeListRef.remove(mensaje.key);
+  }
+
 }

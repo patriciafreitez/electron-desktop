@@ -17,10 +17,10 @@ declare let jsPDF;
   styleUrls: ['./consultar.page.scss'],
 })
 export class ConsultarPage implements OnInit {
-  protected rangoEdadList: Array<RangoEdad> = [];
-  protected patologiaList: Array<Patologia> = [];
-  protected pacientesList: Array<Paciente> = [];
-  protected pacientesObservable: Array<Paciente> = [];
+  public rangoEdadList: Array<RangoEdad> = [];
+  public patologiaList: Array<Patologia> = [];
+  public pacientesList: Array<Paciente> = [];
+  public pacientesObservable: Array<Paciente> = [];
   public listPacienteVacia = 'Buscando pacientes..';
   public pdfIsGenerate = false;
   public rangoEdad = '';

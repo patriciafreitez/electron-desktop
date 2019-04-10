@@ -20,23 +20,17 @@
           <ion-item>
             <ion-label position="floating">* Cariados:</ion-label>
             <ion-input formControlName="cariados" [disabled]="soloVista"></ion-input>
-            <div *ngIf="!formDiagnostico.controls.cariados.valid && formSubmit">
-              <small style = "color:red"> Campo Obligatorio</small>
-            </div>
+
           </ion-item>
           <ion-item>
             <ion-label position="floating">* Opturados:</ion-label>
             <ion-input formControlName="opturados" [disabled]="soloVista"></ion-input>
-            <div *ngIf="!formDiagnostico.controls.opturados.valid && formSubmit">
-              <small style = "color:red"> Campo Obligatorio</small>
-            </div>
+
           </ion-item>
           <ion-item>
             <ion-label position="floating">* Perdidos:</ion-label>
             <ion-input formControlName="perdidos" [disabled]="soloVista"></ion-input>
-            <div *ngIf="!formDiagnostico.controls.perdidos.valid && formSubmit">
-              <small style = "color:red"> Campo Obligatorio</small>
-            </div>
+
           </ion-item>
         </ion-list>
         <ion-list>
@@ -74,9 +68,7 @@
             <ion-item>
               <ion-label position="floating">* Mal posiciones:</ion-label>
               <ion-input formControlName="mal_posiciones" [disabled]="soloVista"></ion-input>
-              <div *ngIf="!formDiagnostico.controls.mal_posiciones.valid && formSubmit">
-                <small style = "color:red"> Campo Obligatorio</small>
-              </div>
+
             </ion-item>
         </ion-list>
       </ion-col>

@@ -7,6 +7,40 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-header>
+  <ion-toolbar>
+        <ion-title>
+            <h2><p>Publicaciones</p></h2>
+        </ion-title>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content class="ion-padding">
+  <ion-card *ngFor="let mensaje of (mensajeList$ | async)?.slice().reverse()">
+    <ion-card-content>
+      <ion-text>
+        <b>{{ mensaje.fecha | date : "dd/MM/y hh:mm:ss"}}</b>
+        <p>{{ mensaje.contenido }}</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col size="11">
+      <ion-textarea [(ngModel)]="msj" 
+        clearInput
+        placeholder="Escriba su mensaje.."></ion-textarea>
+    </ion-col>
+    <ion-col size="1" class="container-send">
+      <ion-button (click)="enviarMensaje()"
+        class="button-send">
+        <ion-icon name="send"></ion-icon>
+      </ion-button> 
+    </ion-col>
+  </ion-row>
+</ion-footer>
+
+  
+
