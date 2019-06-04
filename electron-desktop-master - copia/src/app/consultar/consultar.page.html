@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Consultar Pacientes</ion-title>
+    <ion-button routerLink="/mensajeria" fill="clear" slot="start">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+    <ion-button (click)="generatePdf()"
+      [disabled]="pdfIsGenerate"
+      *ngIf="pacientesObservable.length > 0" fill="clear" slot="end">
+      <ion-spinner [hidden]="!pdfIsGenerate" name="circles" style="position: absolute"></ion-spinner>
+      <ion-icon name="document"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="grid">
+    <ion-row>
+      
+      <ion-col sizeLg="5" sizeMd="5" sizeSm="5" sizeXl="5" sizeXs="12" class="ion-padding-horizontal">
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Rango de edad:</ion-label>
+            <ion-select (ionChange)="filtros()"
+              [(ngModel)]="rangoEdad"
+              okText="Seleccionar" 
+              cancelText="Cerrar">
+              <ion-select-option *ngFor="let rangoEdad of rangoEdadList"
+              [value]="rangoEdad.descripcion">{{rangoEdad.descripcion}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      
+      <ion-col sizeLg="5" sizeMd="5" sizeSm="5" sizeXl="5" sizeXs="12" class="ion-padding-horizontal">
+        <ion-list>
+          <ion-item> 
+            <ion-label position="floating">Patología:</ion-label>
+            <ion-select (ionChange)="filtros()"
+              [(ngModel)]="patologia"
+              multiple="true"
+              okText="Seleccionar" 
+              cancelText="Cerrar">
+              <ion-select-option *ngFor="let patologia of patologiaList"
+                [value]="patologia.descripcion">{{patologia.descripcion}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+
+      <ion-col sizeLg="2" sizeMd="2" sizeSm="2" sizeXl="2" sizeXs="12">
+        <ion-button expand="full" class="filter-button">
+          <ion-icon name="funnel"></ion-icon>
+        </ion-button>
+      </ion-col>
+      
+    </ion-row>
+  </ion-grid>
+    
+  <ion-list class="ion-margin-top ion-padding-horizontal">
+
+    <ion-item class="header-item header">
+      <ion-col size="2">
+        <b>Número Identificación</b>
+      </ion-col>
+      <ion-col size="2">
+        <b>Nombre</b>
+      </ion-col>
+      <ion-col size="2">
+        <b>Apellido</b>
+      </ion-col>
+      <ion-col size="2">
+        <b>Dirección</b>
+      </ion-col>
+      <ion-col size="2">
+        <b>Teléfonos</b>
+      </ion-col>
+      <ion-col size="2">
+        <b>Posibles tratamientos</b>
+      </ion-col>
+      <ion-col *ngIf="isRoot" size="1">
+        <b>Acción</b>
+      </ion-col>
+    </ion-item>
+
+    <ion-item *ngIf="listPacienteVacia !== ''">{{listPacienteVacia}}</ion-item>
+
+    <ion-item
+      *ngFor="let paciente of pacientesObservable; let i = index;"
+      [class]="(i % 2) ? '' : 'header-sub-item'"
+    >
+        <ion-col size="2" (click)="verPaciente(paciente)">
+          <ion-text>{{ paciente.numero_identidad }}</ion-text>
+        </ion-col>
+        <ion-col size="2" (click)="verPaciente(paciente)">
+          <ion-text>{{ paciente.nombre }}</ion-text>
+        </ion-col>
+        <ion-col size="2" (click)="verPaciente(paciente)">
+          <ion-text>{{ paciente.apellido }}</ion-text>
+        </ion-col>
+        <ion-col size="2" (click)="verPaciente(paciente)">
+          <ion-text>{{ paciente.direccion }}</ion-text>
+        </ion-col>
+        <ion-col size="2" (click)="verPaciente(paciente)">
+          <ion-text>{{ paciente.telefono_celular }}<p>{{ paciente.telefono_fijo }}</p></ion-text>
+        </ion-col>
+        <ion-col size="2" (click)="verPaciente(paciente)">
+          <ion-text>{{ paciente.observaciones }}</ion-text>
+        </ion-col>
+        <ion-col *ngIf="isRoot" size="1">
+          <ion-button (click)="presentAlertConfirm(paciente)" *ngIf="isRoot"
+              fill="clear" class="button-remove" color="danger">
+            <ion-icon slot="icon-only" color="danger" name="trash"></ion-icon>
+          </ion-button>
+        </ion-col>
+
+    </ion-item>
+  </ion-list>
+
+</ion-content>

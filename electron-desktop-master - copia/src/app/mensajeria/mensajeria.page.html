@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <img src="https://firebasestorage.googleapis.com/v0/b/unico-8f3b7.appspot.com/o/tooth_smile_dental_happy-512.png?alt=media&token=7fbbcdb4-cef2-4598-802f-7e3a594a0d5b" height="20"/>
+      Banco de Pacientes</ion-title>
+    <ion-button slot="end" (click)="abrirFormulario()" *ngIf="isRoot">Registrar Pacientes</ion-button>
+    <ion-button slot="end" routerLink="/consultar">Consultar Pacientes</ion-button>
+    <ion-button slot="end" (click)="cerrarSesion()">Cerrar Sesion</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <h2><p>Publicaciones</p></h2>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div>
+    <ion-card *ngFor="let mensaje of (mensajeList$ | async)?.slice().reverse()">
+    <ion-card-content>
+      <ion-row>
+        <ion-col [size]="isRoot ? 11 : 12">
+          <b>{{ mensaje.fecha | date : "dd/MM/y hh:mm:ss"}}</b>
+        </ion-col>
+        <ion-col [size]="isRoot ? 1 : 0">
+          <ion-button (click)="presentAlertConfirm(mensaje)" *ngIf="isRoot"
+            fill="clear" class="button-remove" color="danger">
+            <ion-icon slot="icon-only" color="danger" name="trash"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-text>
+        <p>{{ mensaje.contenido }}</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+  </div>
+  
+</ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col size="11">
+      <ion-textarea [(ngModel)]="msj" 
+        clearInput
+        placeholder="Escriba su mensaje.."></ion-textarea>
+    </ion-col>
+    <ion-col size="1" class="container-send">
+      <ion-button (click)="enviarMensaje()"
+        class="button-send">
+        <ion-icon name="send"></ion-icon>
+      </ion-button> 
+    </ion-col>
+  </ion-row>
+</ion-footer>
+
+  
+

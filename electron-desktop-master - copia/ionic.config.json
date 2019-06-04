@@ -1,0 +1,7 @@
+{
+  "name": "Banco de Pacientes",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
