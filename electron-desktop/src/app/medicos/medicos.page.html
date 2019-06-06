@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button (click)="IrAtras()" fill="clear" slot="start">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+    <ion-title>Formulario Antecedentes Médicos</ion-title>
+    <ion-button (click)="validateFormMedicos()" fill="clear" slot="end">
+      <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="formMedicos"> <!--permite añadir las vaildaciones-->
+    <ion-grid class="grid">
+      <ion-row>
+       
+        <ion-col sizeLg="6" sizeMd="6" sizeSm="6" sizeXl="6" sizeXs="12" class="ion-padding-horizontal">
+          <ion-list>
+            <ion-item>
+              <ion-checkbox formControlName="hipertension_arterial" [disabled]="soloVista"></ion-checkbox>
+              <ion-label>&emsp;Hipertensión arterial</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="diabetes_mellitus" [disabled]="soloVista"></ion-checkbox>
+              <ion-label>&emsp;Diabetes mellitus</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="diabetes_gestacional" [disabled]="soloVista"></ion-checkbox>
+              <ion-label>&emsp;Diabetes gestacional</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="enfermedades_tiroidales" [disabled]="soloVista"></ion-checkbox>
+              <ion-label>&emsp;Enfermedades tiroideales</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="enfermedades_cardiovasculares" [disabled]="soloVista"></ion-checkbox>
+              <ion-label>&emsp;Enfermedades cardiovasculares</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="drogadiccion" [disabled]="soloVista"></ion-checkbox>
+              <ion-label>&emsp;Drogadicción</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="embarazo" [disabled]="soloVista"></ion-checkbox>
+              <ion-label>&emsp;Embarazo</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="vih" [disabled]="soloVista"></ion-checkbox>
+              <ion-label>&emsp;VIH</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="enfermedades_gastrointestinales" [disabled]="soloVista"></ion-checkbox>
+              <ion-label>&emsp;Enfermedades gastrointestinales</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+       
+        <ion-col sizeLg="6" sizeMd="6" sizeSm="6" sizeXl="6" sizeXs="12" class="ion-padding-horizontal">
+          <ion-list>
+            <ion-item>
+              <ion-checkbox formControlName="alergias" [disabled]="soloVista"></ion-checkbox>
+              <ion-label>&emsp;Alergias</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="sicologicos" [disabled]="soloVista"></ion-checkbox>
+              <ion-label>&emsp;Psicológicos</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="obesidad" [disabled]="soloVista"></ion-checkbox>
+              <ion-label>&emsp;Obesidad</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="desnutricion" [disabled]="soloVista"></ion-checkbox>
+              <ion-label>&emsp;Desnutrición</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="sano" [disabled]="soloVista"></ion-checkbox>
+              <ion-label>&emsp;Sano</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-checkbox formControlName="fumador" [disabled]="soloVista"></ion-checkbox>
+              <ion-label>&emsp;Fumador</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Cantidad de cigarros al día:</ion-label>
+              <ion-input formControlName="cigarros_dia" type="number" min="0" [disabled]="soloVista"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Observaciones:</ion-label>
+              <ion-textarea formControlName="observaciones" rows="3" [disabled]="soloVista"></ion-textarea>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+       
+      </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-content>

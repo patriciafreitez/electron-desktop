@@ -1,0 +1,31 @@
+<ion-content>
+  <ion-row>
+    <ion-col size="12" class="logo">
+      <img src="https://firebasestorage.googleapis.com/v0/b/unico-8f3b7.appspot.com/o/LogoUAN.png?alt=media&token=6b78c3b2-655d-4ce9-a09c-e3b960a72f22" />
+      <h1 class="text">Sistema de Banco de Pacientes</h1>
+    </ion-col>
+  </ion-row>
+
+  <ion-card class="card"> 
+  <ion-header>
+    <ion-toolbar>
+      <ion-title text-center>Iniciar Sesión</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+    <ion-card-content class="login-page">
+      <ion-item>
+        <ion-label position="stacked">Correo electronico</ion-label>
+        <ion-input type="text" pattern="email" [(ngModel)]="email" clearInput></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="pass" clearInput></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" (click)="login()" class="ion-margin-top">
+        Ingresar
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

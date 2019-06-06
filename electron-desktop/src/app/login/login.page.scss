@@ -1,0 +1,35 @@
+.card {
+    align-content: center;
+    margin: auto;
+    width: 40%;
+}
+.login-page {
+    padding-left: 50px;
+    padding-right: 50px
+}
+ion-toolbar .toolbar-background {
+    background-color: #00A8E8 !important;
+}
+.grid {
+    padding: auto;
+}
+.logo {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+ion-content {
+    --background: var(--ion-color-page); 
+}
+ion-card-content {
+    background: var(--ion-color-white); 
+}
+ion-toolbar {
+    --background: var(--ion-color-blue-dark); 
+} 
+ion-title {
+    --color: var(--ion-color-white);
+}
+.text {
+    color: var(--ion-color-blue-dark); 
+}

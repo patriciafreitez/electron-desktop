@@ -1,0 +1,18 @@
+.text{
+    text-align: center
+}
+.filter-button {
+    position: relative;
+    top: calc(40%);
+}
+.header {
+    height: 50px;
+    color: var(--ion-color-white);
+    --background: var(--ion-color-page);
+}
+.header-item {
+    --inner-padding-end: 0px;
+}
+.header-sub-item {
+    --background: #f9f9f9;
+}

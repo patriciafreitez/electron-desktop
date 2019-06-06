@@ -1,0 +1,227 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title >
+      Formulario Datos Personales
+    </ion-title>
+    <ion-button (click)="irAtras()" fill="clear" slot="start">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+    <ion-button (click)="validateFormPersonal()" fill="clear" slot="end">
+        <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="formPersonales"> <!--permite añadir las vaildaciones-->
+    <ion-grid class="grid">
+      <ion-row>
+       
+        <ion-col sizeLg="6" sizeMd="6" sizeSm="6" sizeXl="6" sizeXs="12" class="ion-padding-horizontal">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">* E.P.S:</ion-label>
+              <ion-select #selectEps
+                formControlName="eps"
+                [disabled]="soloVista" 
+                okText="Seleccionar" 
+                cancelText="Cerrar"
+                [interfaceOptions]="interfaceOptions">
+                <ion-select-option *ngFor="let eps of epsList$"
+                  [value]="eps.descripcion"
+                  >{{eps.descripcion}}</ion-select-option>
+              </ion-select>
+              <div *ngIf="!formPersonales.controls.eps.valid && formSubmit">
+               <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">* Nombre:</ion-label>
+              <ion-input formControlName="nombre" [disabled]="soloVista"></ion-input>
+              <div *ngIf="!formPersonales.controls.nombre.valid && formSubmit">
+                <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">* Apellido:</ion-label>
+              <ion-input formControlName="apellido" [disabled]="soloVista"></ion-input>
+              <div *ngIf="!formPersonales.controls.eps.valid && formSubmit">
+                <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">* Tipo de Documento:</ion-label>
+              <ion-select #selectTipoDocumento
+                formControlName="tipo_documento" 
+                [disabled]="soloVista"
+                okText="Seleccionar" 
+                cancelText="Cerrar"
+                [interfaceOptions]="interfaceOptions">
+                <ion-select-option *ngFor="let tipo_documento of tipoDocumentoList$"
+                [value]="tipo_documento.descripcion">{{tipo_documento.descripcion}}</ion-select-option>
+              </ion-select>
+              <div *ngIf="!formPersonales.controls.tipo_documento.valid && formSubmit">
+                <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">* Numero de Identidad:</ion-label>
+              <ion-input formControlName="numero_identidad" [disabled]="soloVista"></ion-input>
+              <div *ngIf="!formPersonales.controls.numero_identidad.valid && formSubmit">
+                <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">* Fecha de Nacimiento:</ion-label>
+              <ion-datetime formControlName="fecha_nacimiento" 
+                [disabled]="soloVista"
+                pickerFormat="DD MMM, YYYY"
+                display-format="DD MMM, YYYY"
+                monthShortNames="Ene, Feb, Mar, Apr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
+                cancelText="Cerrar"
+                doneText="Seleccionar"  
+              ></ion-datetime>
+              <div *ngIf="!formPersonales.controls.fecha_nacimiento.valid && formSubmit">
+                <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">* Lugar de Nacimiento:</ion-label>
+              <ion-input formControlName="lugar_nacimiento" [disabled]="soloVista"></ion-input>
+              <div *ngIf="!formPersonales.controls.lugar_nacimiento.valid && formSubmit">
+                <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">* Genero:</ion-label>
+              <ion-select #selectGenero
+                formControlName="genero" 
+                [disabled]="soloVista"
+                okText="Seleccionar" 
+                cancelText="Cerrar"
+                [interfaceOptions]="interfaceOptions">
+                <ion-select-option *ngFor="let genero of generoList$"
+                [value]="genero.descripcion">{{genero.descripcion}}</ion-select-option>
+              </ion-select>
+              <div *ngIf="!formPersonales.controls.genero.valid && formSubmit">
+                <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">* Estado Civil:</ion-label>
+              <ion-select #selectEstadoCivil
+                formControlName="estado_civil" 
+                [disabled]="soloVista"
+                okText="Seleccionar" 
+                cancelText="Cerrar"
+                [interfaceOptions]="interfaceOptions">
+                <ion-select-option *ngFor="let estado_civil of estadoCivilList$"
+                  [value]="estado_civil.descripcion">{{estado_civil.descripcion}}</ion-select-option>
+              </ion-select>
+              <div *ngIf="!formPersonales.controls.estado_civil.valid && formSubmit">
+                <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+            <ion-item> 
+              <ion-label position="floating">* Nivel Educativo:</ion-label>
+              <ion-select #selectNivelEducativo
+                formControlName="nivel_educativo" 
+                [disabled]="soloVista"
+                okText="Seleccionar" 
+                cancelText="Cerrar"
+                [interfaceOptions]="interfaceOptions">
+                  <ion-select-option *ngFor="let nivel_educativo of nivelEducativoList$"
+                  [value]="nivel_educativo.descripcion">{{nivel_educativo.descripcion}}</ion-select-option>
+              </ion-select>
+              <div *ngIf="!formPersonales.controls.nivel_educativo.valid && formSubmit">
+                <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+       
+        <ion-col sizeLg="6" sizeMd="6" sizeSm="6" sizeXl="6" sizeXs="12" class="ion-padding-horizontal">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">* Historia Clinica:</ion-label>
+              <ion-input formControlName="historia_clinica" [disabled]="soloVista"></ion-input>
+              <div *ngIf="!formPersonales.controls.historia_clinica.valid && formSubmit">
+                <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">* Fecha:</ion-label>
+              <ion-datetime formControlName="fecha" 
+                [disabled]="soloVista"
+                pickerFormat="DD MMM, YYYY"
+                display-format="DD MMM, YYYY"
+                monthShortNames="Ene, Feb, Mar, Apr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
+                cancelText="Cerrar"
+                doneText="Seleccionar"  
+              ></ion-datetime>
+              <div *ngIf="!formPersonales.controls.fecha.valid && formSubmit">
+                <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+            <ion-item> 
+              <ion-label position="floating">* Nivel Socioeconomico:</ion-label>
+              <ion-select #selectNivelSocioeconomico
+                formControlName="nivel_socioeconomico" 
+                [disabled]="soloVista"
+                okText="Seleccionar" 
+                cancelText="Cerrar"
+                [interfaceOptions]="interfaceOptions">
+                <ion-select-option *ngFor="let nivel_socioeconomico of nivelSocioeconomicoList$"
+                  [value]="nivel_socioeconomico.descripcion">{{nivel_socioeconomico.descripcion}}</ion-select-option>
+              </ion-select>
+              <div *ngIf="!formPersonales.controls.nivel_socioeconomico.valid && formSubmit">
+                <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">* Ocupación:</ion-label>
+              <ion-input formControlName="ocupacion" [disabled]="soloVista"></ion-input>
+              <div *ngIf="!formPersonales.controls.ocupacion.valid && formSubmit">
+                <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">* Telefono Celular:</ion-label>
+              <ion-input formControlName="telefono_celular" [disabled]="soloVista"></ion-input>
+              <div *ngIf="!formPersonales.controls.telefono_celular.valid && formSubmit">
+                <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">* Telefono Fijo:</ion-label>
+              <ion-input formControlName="telefono_fijo" [disabled]="soloVista"></ion-input>
+              <div *ngIf="!formPersonales.controls.telefono_fijo.valid && formSubmit">
+                <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating"> Correo:</ion-label>
+              <ion-input formControlName="correo" [disabled]="soloVista"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">* Dierección:</ion-label>
+              <ion-input formControlName="direccion" [disabled]="soloVista"></ion-input> <!--controla que el campo este valido-->
+              <div *ngIf="!formPersonales.controls.direccion.valid && formSubmit"> <!--imprime un mensaje (rojo) que el campo es obligatorio cuando intentas dejarlo-->
+                <small style = "color:red"> Campo Obligatorio</small>
+              </div>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Responsable:</ion-label>
+              <ion-input formControlName="responsable" [disabled]="soloVista"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Telefono Responsable:</ion-label>
+              <ion-input formControlName="telefono_responsable" [disabled]="soloVista"></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
