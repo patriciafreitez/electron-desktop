@@ -64,7 +64,7 @@ export class ConsultarPage implements OnInit {
 
   _loadRangoEdad() {
     this.rangoEdadService.getRangoEdad().valueChanges().subscribe((data) => {
-      this.rangoEdadList = data
+      this.rangoEdadList = data;
     });
   }
 
@@ -140,16 +140,18 @@ export class ConsultarPage implements OnInit {
         rows = [],
         headers = [
       "Número Identificación",
-      "Nombre y Apellido", 
-      "Dirección", 
-      "Teléfonos", 
+      "Nombre",
+      "Apellido",
+      "Dirección",
+      "Teléfonos",
       "Observación"
     ];
     
     this.pacientesObservable.forEach((paciente: Paciente) => {
       var temp = [
         paciente.numero_identidad,
-        `${paciente.nombre} ${paciente.apellido}`,
+        paciente.nombre,
+        paciente.apellido,
         paciente.direccion,
         `${paciente.telefono_celular} \n${paciente.telefono_fijo}`,
         paciente.observaciones
