@@ -28,8 +28,22 @@ export class PacienteService {
     });
   }
 
-  editPaciente(paciente: Paciente) {
+  /*editPaciente(paciente: Paciente) {
     return this.pacienteListRef.update(paciente.key, paciente);
+  }*/
+
+  async editPaciente(paciente: Paciente){
+    this.pacienteListRef.query.once('value').then((snapshot) => {
+      snapshot.forEach((childSnapshot: any) => {
+        const pkey = childSnapshot.key;
+        const chval: Paciente = childSnapshot.val();
+        if(paciente.numero_identidad === chval.numero_identidad)
+        {
+          this.pacienteListRef.update(pkey,paciente);
+          return true;
+        };
+      });
+    });
   }
 
   async removePaciente(paciente: Paciente) {
@@ -62,10 +76,11 @@ export class PacienteService {
           paciente.enfermedades_gastrointestinales === chval.enfermedades_gastrointestinales && paciente.fumador === chval.fumador &&
           paciente.desnutricion === chval.desnutricion && paciente.cigarros_dia === chval.cigarros_dia &&
           paciente.gingivitis === chval.gingivitis && paciente.caries === chval.caries &&
-          paciente.mal_posiciones === chval.mal_posiciones && paciente.interposicion_lingual === chval.interposicion_lingual) {
-          this.pacienteListRef.remove(pkey);
-          return true;
-        }
+          paciente.mal_posiciones === chval.mal_posiciones && paciente.interposicion_lingual === chval.interposicion_lingual)
+          {
+            this.pacienteListRef.remove(pkey);
+            return true;
+          }
       });
     });
   }

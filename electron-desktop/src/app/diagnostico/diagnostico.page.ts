@@ -55,7 +55,7 @@ export class DiagnosticoPage implements OnInit {
     })
   }
 
-  loadParams() {//se guardan los datos de la pantalla pasada para sobre escribir enn formulario data
+  loadParams() {//se guardan los datos de la pantalla pasada para sobre escribir en formulario data
     this.storage.get('form').then(form => {
       if(form.formDiagnostico !== undefined) {
         const formDiagnostico = form.formDiagnostico;
@@ -145,15 +145,33 @@ export class DiagnosticoPage implements OnInit {
     }
   }
 
+  modificar(){
+    if(this.formDiagnostico.valid) {
+      this.guardarForm().then((data) => {
+        var user: any = {};
+        for(let key in data){
+          for(let key2 in data[key]){
+            user[key2] = data[key][key2]
+          }
+        }
+      this.pacienteService.editPaciente(user);
+      this.storage.remove('form');
+      this.navController.navigateBack('mensajeria');
+      })
+    } else {
+      this.formSubmit = true; // controla que el mensaje salga cuando intenta cambiar de pantalla
+    }
+  }
+
   ngOnInit() {
     this._loadPeriodontitis();
   }
 
   _loadPeriodontitis(){
     this.periodontitisService.getPeriodontitis().valueChanges().subscribe((data) => {
-      this.periodontitisist$ = data
+      this.periodontitisist$ = data;
       if(this.paciente !== null) {
-        this.selectPeriodontitis.selectedText = this.paciente.periodontitis
+        this.selectPeriodontitis.selectedText = this.paciente.periodontitis;
         this.formDiagnostico.get('periodontitis').setValue(this.paciente.periodontitis);
       }
     });

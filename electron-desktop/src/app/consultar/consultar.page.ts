@@ -56,7 +56,7 @@ export class ConsultarPage implements OnInit {
   }
 
   verPaciente(paciente) {
-    const params = { disabled: true, paciente: paciente };
+    const params = { disabled: false, paciente: paciente };
     this.storage.set('disabled', params).then(() => {
       this.navController.navigateForward('basico');
     })
